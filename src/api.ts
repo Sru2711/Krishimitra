@@ -1,0 +1,2 @@
+export const openWeatherApi = (lat: number, lon: number) =>
+  `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,rain&hourly=precipitation_probability&timezone=auto`;

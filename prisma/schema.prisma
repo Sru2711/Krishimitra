@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Farmer {
+  id       String  @id @default(uuid())
+  name     String
+  mobile   String  @unique // Essential for SMS/WhatsApp communication
+  email    String? @unique
+  password String
+
+  // Geographic and Demographic info
+  state    String?
+  district String?
+  pincode  String?
+
+  farmerType  String? // e.g., "Small", "Marginal", "Large"
+  landHolding Float? // Land size in acres/hectares
+  primaryCrop String? // e.g., "Wheat", "Rice", "Sugarcane"
+
+  aadharHash String? @unique // Store as hash, never plain text
+
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  farmDataHistories FarmDataHistory[]
+
+  @@map("farmers")
+}
+
+model FarmDataHistory {
+  id        String   @id @default(uuid())
+  farmerId  String
+  farmer    Farmer   @relation(fields: [farmerId], references: [id])
+  crop      String
+  season    String
+  cropYield Int
+  price     Int
+  earned    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("farmHistory")
+}

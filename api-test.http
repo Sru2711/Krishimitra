@@ -1,0 +1,14 @@
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+    "name": "Ramakant",
+    "mobile": "98000000",
+    "email": "ramakant@gmail.com",  
+    "state": "Maharashtra",
+    "district": "Pune",
+    "pincode": "411001",
+    "farmerType": "Small",
+    "landHolding": 5.2,
+    "primaryCrop": "Sugarcane"
+}
