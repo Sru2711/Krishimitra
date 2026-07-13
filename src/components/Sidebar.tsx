@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
     { name: "Farm Overview", link: "/dashboard", icon: home },
     { name: "Farm Advisory", link: "/farmerAdvisory", icon: advisory },
     { name: "Ask Krishimitra", link: "/askKrishiMitra", icon: message },
-    { name: "Farm History", link: "/farmHistory", icon: history },
+    { name: "Farm Diary", link: "/farmHistory", icon: history },
     { name: "Farmer Profile", link: "/farmerProfile", icon: profile },
     // { name: "Settings", link: "/settings", icon: setting },
   ];
@@ -85,41 +85,39 @@ const Sidebar: React.FC = () => {
               <li key={item.link}>
                 <Tooltip>
                   <TooltipTrigger>
-                    <div>
-                    <Link
-                      href={item.link}
-                      className={`flex items-center ${
-                        collapse ? "justify-center" : "gap-4"
-                      } p-3 rounded-xl transition-all ${
-                        isActive
-                          ? "bg-recommendation/20 text-white"
-                          : "text-black/70 hover:bg-recommendation"
-                      }`}
-                    >
-                      <Image
-                        src={item.icon}
-                        alt={item.name}
-                        width={30}
-                        height={30}
-                        className="shrink-0 drop-shadow-md"
-                      />
+                      <Link
+                        href={item.link}
+                        className={`flex items-center ${
+                          collapse ? "justify-center" : "gap-4"
+                        } p-3 rounded-xl transition-all ${
+                          isActive
+                            ? "bg-recommendation/20 text-white"
+                            : "text-black/70 hover:bg-recommendation"
+                        }`}
+                      >
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          width={30}
+                          height={30}
+                          className="shrink-0 drop-shadow-md"
+                        />
 
-                      {!collapse && (
-                        <span className="text-lg font-medium whitespace-nowrap">
-                          {item.name}
-                        </span>
-                      )}
-                    </Link>
-                    </div>
+                        {!collapse && (
+                          <span className="text-lg font-medium whitespace-nowrap">
+                            {item.name}
+                          </span>
+                        )}
+                      </Link>
                   </TooltipTrigger>
 
                   {collapse && (
                     <TooltipContent
                       side="top"
-                      sideOffset={4}
-                      className="bg-recommendation p-2 text-white text-sm"
+                      sideOffset={8}
+                      className="bg-recommendation text-white"
                     >
-                      <p>{item.name}</p>
+                      {item.name}
                     </TooltipContent>
                   )}
                 </Tooltip>
@@ -132,25 +130,28 @@ const Sidebar: React.FC = () => {
       {/* Footer */}
       <div className="p-4 text-recommendation text-sm text-center flex flex-col items-center justify-center">
         <Tooltip>
-          <TooltipTrigger>
-            <div>
-            <button onClick={handleLogout} className="flex items-center gap-2">
-              <Image
-                src={logoutIcon}
-                alt="Logout"
-                width={30}
-                height={30}
-                className="shrink-0 drop-shadow-md"
-              />
+          <TooltipTrigger
+            render={
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2"
+              >
+                <Image
+                  src={logoutIcon}
+                  alt="Logout"
+                  width={30}
+                  height={30}
+                  className="shrink-0 drop-shadow-md"
+                />
 
-              {!collapse && (
-                <span className="text-lg font-medium whitespace-nowrap">
-                  Logout
-                </span>
-              )}
-            </button>
-            </div>
-          </TooltipTrigger>
+                {!collapse && (
+                  <span className="text-lg font-medium whitespace-nowrap">
+                    Logout
+                  </span>
+                )}
+              </button>
+            }
+          ></TooltipTrigger>
 
           {collapse && (
             <TooltipContent

@@ -17,18 +17,18 @@ export default function RootLayout({
     // <html lang="en">
 
     <Protected>
-      <GetUserComponent />
-      <Toaster position="top-right" reverseOrder={false}/>
+      <TooltipProvider>
+        <GetUserComponent />
+        <Toaster position="top-right" reverseOrder={false} />
         <div className="w-full flex flex-row h-dvh overflow-hidden ">
           <div className="h-full ">
             <Sidebar />
           </div>
           <main className="flex-1 overflow-y-auto p-4 h-screen ">
-            <TooltipProvider>
             {children}
-            </TooltipProvider>
           </main>
         </div>
+      </TooltipProvider>
     </Protected>
 
     // </html>
