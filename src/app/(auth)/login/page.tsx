@@ -19,7 +19,6 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginForm) => {
     let loginData = await login(data);
-    console.log("Login Data:", loginData);
     if (loginData?.token) {
       localStorage?.setItem("CurrentToken", loginData.token);
       dispatch(getUser(loginData.user));

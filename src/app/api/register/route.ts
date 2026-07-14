@@ -16,6 +16,7 @@ export async function POST(req: Request) {
       });
       let token = await generateToken(farmer);
       const { password, ...user } = farmer
+      console.log("user",user)
       return NextResponse.json(
         {
            message: "Registration Successful",

@@ -24,8 +24,8 @@ import { getUser } from "@/src/features/Auth/authSlice";
 
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
-  const [cords, setCords] = useState({ latitude: 0, longitude: 0 });
-  const [error, setError] = useState({});
+  // const [cords, setCords] = useState({ latitude: 0, longitude: 0 });
+  // const [error, setError] = useState({});
   const [user, setUser] = useState({});
   // const [weatherState, setWeaterState] = useState();
 
@@ -44,18 +44,18 @@ export default function Dashboard() {
   );
 
   // to get the coords
-  useEffect(() => {
-    getCoords(setCords, setError);
-  }, []);
+  // useEffect(() => {
+  //   getCoords(setCords, setError);
+  // }, []);
 
   //to get data
   useEffect(() => {
-    if (!cords) return;
+    if (!userData?.latitude && userData?.longtitude) return;
     const fetchWeather = async () => {
       try {
         const data = await getWeatherInformation(
-          cords?.latitude,
-          cords?.longitude,
+          userData?.latitude,
+          userData?.longtitude,
         );
         dispatch(getWeatherData(data));
       } catch (error) {
@@ -64,7 +64,7 @@ export default function Dashboard() {
     };
 
     fetchWeather();
-  }, [cords, dispatch]);
+  }, [userData?.longtitude, userData?.latitude, dispatch]);
 
   const weatherData: weatherMenu = [
     {
@@ -130,8 +130,8 @@ export default function Dashboard() {
           </span>
           <span className="font-medium text-sm md:text-md text-gray-600">
             Location: {userData?.state}, District :{userData?.district}| Date:
-            Oct 26, 2023 | Lang: English | Latitude: {cords?.latitude} |
-            Longitutde :{cords?.longitude}
+            Oct 26, 2023 | Lang: English | Latitude: {userData?.latitude} |
+            Longitutde :{userData?.longtitude}
           </span>
         </div>
       </div>

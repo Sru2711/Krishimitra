@@ -74,7 +74,7 @@ export type FarmerProfileState = {
   updatedAt: Date;
 };
 
-export  type RegisterForm = {
+export type RegisterForm = {
   name: string;
   mobile: string;
   email?: string;
@@ -91,6 +91,18 @@ export  type RegisterForm = {
 
   password: string;
   confirmPassword: string;
+
+  // Location
+  latitude?: number;
+  longtitude?: number;
+
+  // Soil
+  soilType?: string;
+  soilPH?: number;
+  clay?: number;
+  sand?: number;
+  silt?: number;
+  organicCarbon?: number;
 };
 
 export type LoginForm = {

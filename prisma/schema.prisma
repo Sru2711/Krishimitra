@@ -29,6 +29,8 @@ model Farmer {
 
   farmerType  String? // e.g., "Small", "Marginal", "Large"
   landHolding Float? // Land size in acres/hectares
+  latitude    Float?
+  longtitude  Float?
   primaryCrop String? // e.g., "Wheat", "Rice", "Sugarcane"
 
   aadharHash String? @unique // Store as hash, never plain text
