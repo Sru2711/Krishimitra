@@ -21,13 +21,16 @@ import { getCoords } from "@/src/components/CurrentLocation";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import authSlice from "../../../features/Auth/authSlice";
 import { getUser } from "@/src/features/Auth/authSlice";
+import Plant from "@/src/assets/Plant.gif";
+import Flower from "@/src/assets/Flower.gif";
 
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
   // const [cords, setCords] = useState({ latitude: 0, longitude: 0 });
   // const [error, setError] = useState({});
   const [user, setUser] = useState({});
-  // const [weatherState, setWeaterState] = useState();
+  const [recommendationState, setRecommendationState] = useState(false);
+  const [fieldState, setFieldState] = useState(false);
 
   const dispatch = useDispatch();
   const userData = useAppSelector((state) => {
@@ -150,67 +153,73 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="md:col-span-1 p-4 rounded-xl border-none bg-recommendation">
-            <div className="w-full border border-white p-2 rounded-lg">
-              <div className="w-full text-white text-md sm:text-lg md:text-xl lg:text-3xl font-semibold ">
-                <h1 className="p-2 md:p-5">
-                  Best Crops for Current Conditions
-                </h1>
+            {recommendationState ? (
+              <div className="w-full h-full max-h-screen flex items-center justify-center">
+              <Image src={Plant} alt={"Loading..."} width={100} height={100} />
               </div>
+            ) : (
+              <div className="w-full border border-white p-2 rounded-lg">
+                <div className="w-full text-white text-md sm:text-lg md:text-xl lg:text-3xl font-semibold ">
+                  <h1 className="p-2 md:p-5">
+                    Best Crops for Today
+                  </h1>
+                </div>
 
-              <div className="w-full  p-4 flex flex-col ">
-                <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                  <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                    Best Crops:   
+                <div className="w-full  p-4 flex flex-col ">
+                  <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                    <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                      Best Crops:
+                    </div>
+                    <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
+                      {" "}
+                      Soyabean
+                    </div>
                   </div>
-                  <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
-                    {" "}
-                    Soyabean
+                  <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                    <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                      Confidence:
+                    </div>
+                    <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
+                      High
+                    </div>
                   </div>
-                </div>
-                <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                  <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                    Confidence:
+                  <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                    <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                      Best Score:
+                    </div>
+                    <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
+                      98%
+                    </div>
                   </div>
-                  <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
-                    High
-                  </div>
-                </div>
-                <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                  <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                    Best Score:
-                  </div>
-                  <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
-                    98%
-                  </div>
-                </div>
-                <div className="w-full p-2 flex flex-col justify-start lg:justify-between md:items-start lg:items-start">
-                  <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                    Why?
-                  </div>
+                  <div className="w-full p-2 flex flex-col justify-start lg:justify-between md:items-start lg:items-start">
+                    <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                      Why?
+                    </div>
 
-                  <div className="w-full  text-white text-sm sm:text-md md:text-lg lg:text-xl font-normal">
-                    <ul className="w-full list-disc list-inside space-y-2">
-                      <li>Suitable soil for soybean cultivation.</li>
-                      <li>
-                        Favorable weather conditions for the current season.
-                      </li>
-                      <li>High expected market demand and better profit.</li>
-                    </ul>
+                    <div className="w-full  text-white text-sm sm:text-md md:text-lg lg:text-xl font-normal">
+                      <ul className="w-full list-disc list-inside space-y-2">
+                        <li>Suitable soil for soybean cultivation.</li>
+                        <li>
+                          Favorable weather conditions for the current season.
+                        </li>
+                        <li>High expected market demand and better profit.</li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
+
+                <div className="w-full mt-4 flex justify-center items-center">
+                  <button
+                    className="text-recommendation text-lg md:text-xl bg-amber-50 p-3 md:p-4 w-full md:w-96 rounded-md font-medium hover:bg-amber-100 transition-colors"
+                    onClick={() => {
+                      handleModalOpen();
+                    }}
+                  >
+                    Other Suitable Crops
+                  </button>
                 </div>
               </div>
-
-              <div className="w-full mt-4 flex justify-center items-center">
-                <button
-                  className="text-recommendation text-lg md:text-xl bg-amber-50 p-3 md:p-4 w-full md:w-96 rounded-md font-medium hover:bg-amber-100 transition-colors"
-                  onClick={() => {
-                    handleModalOpen();
-                  }}
-                >
-                  Other Suitable Crops
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -259,35 +268,40 @@ export default function Dashboard() {
           <div className="w-full text-xl md:text-2xl p-2 font-semibold">
             <h1> Field Alert </h1>
           </div>
-          {/* Added max-h-64 (or height of your choice) and overflow-y-auto */}
-          <div className="flex flex-col gap-4 max-h-64 overflow-y-auto pr-2">
-            {alerts?.map((alert, index) => {
-              const alterType =
-                alert.type === "danger"
-                  ? "bg-red-50 border-red-500 text-red-700"
-                  : alert.type === "warning"
-                    ? "bg-amber-50 border-amber-500 text-amber-700"
-                    : "bg-blue-50 border-blue-500 text-blue-700";
+          {fieldState ? (
+            <div className="flex max-h-screen items-center justify-center">
+            <Image src={Flower} alt={"Loading..."} width={100} height={100} />
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4 max-h-64 overflow-y-auto pr-2">
+              {alerts?.map((alert, index) => {
+                const alterType =
+                  alert.type === "danger"
+                    ? "bg-red-50 border-red-500 text-red-700"
+                    : alert.type === "warning"
+                      ? "bg-amber-50 border-amber-500 text-amber-700"
+                      : "bg-blue-50 border-blue-500 text-blue-700";
 
-              return (
-                <div
-                  key={index} // Using index is safer here
-                  className={`p-3 rounded-lg border flex items-center gap-3 ${alterType}`}
-                >
-                  <Image
-                    src={alert?.icons}
-                    alt={alert?.type}
-                    width={25}
-                    height={20}
-                  />
-                  {/* <span className="font-bold uppercase text-xs">
+                return (
+                  <div
+                    key={index} // Using index is safer here
+                    className={`p-3 rounded-lg border flex items-center gap-3 ${alterType}`}
+                  >
+                    <Image
+                      src={alert?.icons}
+                      alt={alert?.type}
+                      width={25}
+                      height={20}
+                    />
+                    {/* <span className="font-bold uppercase text-xs">
                     {alert.type}
                   </span> */}
-                  <p className="text-sm font-medium">{alert.message}</p>
-                </div>
-              );
-            })}
-          </div>
+                    <p className="text-sm font-medium">{alert.message}</p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
       {modal && (

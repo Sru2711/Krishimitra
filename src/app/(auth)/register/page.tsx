@@ -26,6 +26,7 @@ export default function RegisterPage() {
     if (registerData?.token) {
       localStorage.setItem("CurrentToken", registerData.token);
       dispatch(getUser(registerData.user));
+      
       router.push("/dashboard");
     } else {
       alert("Registration failed");

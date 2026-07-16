@@ -29,7 +29,7 @@ export default function LoginPage() {
 
     // dispatch(getUser(data))
   };
-
+  
   return (
     <main className="w-full min-h-screen bg-bg flex items-center justify-center px-4">
       <div className="w-full max-w-md rounded-3xl bg-advisory border-2 border-black p-8 shadow-2xl">

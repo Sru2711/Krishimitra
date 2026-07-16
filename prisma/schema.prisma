@@ -16,36 +16,30 @@ model User {
 }
 
 model Farmer {
-  id       String  @id @default(uuid())
-  name     String
-  mobile   String  @unique // Essential for SMS/WhatsApp communication
-  email    String? @unique
-  password String
-
-  // Geographic and Demographic info
-  state    String?
-  district String?
-  pincode  String?
-
-  farmerType  String? // e.g., "Small", "Marginal", "Large"
-  landHolding Float? // Land size in acres/hectares
-  latitude    Float?
-  longtitude  Float?
-  primaryCrop String? // e.g., "Wheat", "Rice", "Sugarcane"
-
-  aadharHash String? @unique // Store as hash, never plain text
-
+  id                String            @id @default(uuid())
+  name              String
+  mobile            String            @unique
+  email             String?           @unique
+  password          String
+  state             String?
+  district          String?
+  pincode           String?
+  farmerType        String?
+  landHolding       Float?
+  primaryCrop       String?
+  aadharHash        String?           @unique
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
+  latitude          Float?
+  longtitude        Float?
   farmDataHistories FarmDataHistory[]
+  soilDatas         soilData[]
 
   @@map("farmers")
 }
 
 model FarmDataHistory {
   id        String   @id @default(uuid())
-  farmerId  String
-  farmer    Farmer   @relation(fields: [farmerId], references: [id])
   crop      String
   season    String
   cropYield Int
@@ -53,6 +47,29 @@ model FarmDataHistory {
   earned    Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  farmerId  String
+  farmer    Farmer   @relation(fields: [farmerId], references: [id])
 
   @@map("farmHistory")
+}
+
+model soilData {
+  id                     String    @id @default(uuid())
+  farmerId               String
+  soilType               String?
+  fertilityLevel         Int?
+  soilPH                 Decimal?  @db.Decimal(3, 1)
+  organicCarbon          Decimal?  @db.Decimal(5, 2)
+  clayPercentage         Decimal?  @db.Decimal(5, 2)
+  sandPercentage         Decimal?  @db.Decimal(5, 2)
+  siltPercentage         Decimal?  @db.Decimal(5, 2)
+  cationExchangeCapacity Decimal?  @db.Decimal(5, 2)
+  nitrogen               Decimal?  @db.Decimal(5, 2)
+  bulkDensity            Decimal?  @db.Decimal(5, 2)
+  coarseFragments        Decimal?  @db.Decimal(5, 2)
+  apiProvider            String?   @default("ISRIC SoilGrids")
+  lastFetchedAt          DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  farmer                 Farmer    @relation(fields: [farmerId], references: [id], onDelete: Cascade)
 }

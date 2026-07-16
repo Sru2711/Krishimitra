@@ -97,12 +97,7 @@ export type RegisterForm = {
   longtitude?: number;
 
   // Soil
-  soilType?: string;
-  soilPH?: number;
-  clay?: number;
-  sand?: number;
-  silt?: number;
-  organicCarbon?: number;
+  
 };
 
 export type LoginForm = {
