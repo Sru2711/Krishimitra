@@ -1,16 +1,17 @@
-import { NextResponse } from "next/server";
-import { recommendation } from "./recommendation";
 import { ai } from "@/src/lib/gemini";
-import { recommendationPrompt } from "@/src/lib/prompts";
+import { fieldAlertPrompt } from "@/src/lib/prompts";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  let recommend: { cropName: string; score: number }[] = [];
   let body = await req.json();
-  if (!body) return NextResponse.json({ message: "" }, { status: 401 });
+
+  if (!body)
+    NextResponse.json(
+      { message: "Cannot find any info sorry!" },
+      { status: 400 },
+    );
   else {
-    const recData = await recommendation(body, recommend);
     const input = {
-      recommendations: recData.slice(0, 5),
       soil: {
         soilType: body.soilType,
         soilPH: body.soilPH,
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
         model: "gemini-flash-latest",
         contents: JSON.stringify(input),
         config: {
-          systemInstruction: recommendationPrompt,
+          systemInstruction: fieldAlertPrompt,
           responseMimeType: "application/json",
         },
       });
@@ -42,13 +43,12 @@ export async function POST(req: Request) {
       if (!text) {
         throw new Error("Empty response from Gemini");
       }
-      console.log("text", text);
       return NextResponse.json(JSON.parse(text));
     } catch (error) {
       console.error(error);
 
       return NextResponse.json(
-        { error: "Failed to generate recommendations." },
+        { error: "Failed to generate warning." },
         { status: 500 },
       );
     }

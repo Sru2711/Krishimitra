@@ -1,0 +1,2958 @@
+[
+{
+"cropName": "Rice",
+"category": "Cereal",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Clay"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 70,
+"maxHumidity": 95,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 2180,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 120,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Lentil",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Rice"
+]
+},
+{
+"cropName": "Wheat",
+"category": "Cereal",
+"season": "Rabi",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2275,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 135,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Soybean",
+"Cotton"
+],
+"avoidPreviousCrops": [
+"Wheat"
+]
+},
+{
+"cropName": "Maize",
+"category": "Cereal",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Red",
+"Loamy"
+],
+"minTemperature": 21,
+"maxTemperature": 32,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 600,
+"marketPricePerQuintal": 2090,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 95,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Green Gram",
+"Cowpea"
+],
+"avoidPreviousCrops": [
+"Maize"
+]
+},
+{
+"cropName": "Pearl Millet",
+"category": "Cereal",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Red",
+"Loamy"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 30,
+"maxHumidity": 60,
+"idealRainfall": 350,
+"marketPricePerQuintal": 2500,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 80,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cluster Bean",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Pearl Millet"
+]
+},
+{
+"cropName": "Sorghum",
+"category": "Cereal",
+"season": "Kharif",
+"preferredSoils": [
+"Black",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 35,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 500,
+"marketPricePerQuintal": 3180,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 110,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Chickpea",
+"Groundnut"
+],
+"avoidPreviousCrops": [
+"Sorghum"
+]
+},
+{
+"cropName": "Finger Millet",
+"category": "Cereal",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Laterite",
+"Loamy"
+],
+"minTemperature": 20,
+"maxTemperature": 30,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 750,
+"marketPricePerQuintal": 3845,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 105,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pigeon Pea",
+"Castor"
+],
+"avoidPreviousCrops": [
+"Finger Millet"
+]
+},
+{
+"cropName": "Barley",
+"category": "Cereal",
+"season": "Rabi",
+"preferredSoils": [
+"Alluvial",
+"Sandy",
+"Loamy"
+],
+"minTemperature": 12,
+"maxTemperature": 26,
+"minHumidity": 45,
+"maxHumidity": 70,
+"idealRainfall": 300,
+"marketPricePerQuintal": 1850,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 120,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cluster Bean",
+"Black Gram"
+],
+"avoidPreviousCrops": [
+"Barley"
+]
+},
+{
+"cropName": "Oats",
+"category": "Cereal",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 10,
+"maxTemperature": 24,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 450,
+"marketPricePerQuintal": 2200,
+"marketDemand": "Low",
+"waterRequirement": "Medium",
+"growingDurationDays": 110,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cowpea",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Oats"
+]
+},
+{
+"cropName": "Chickpea",
+"category": "Pulse",
+"season": "Rabi",
+"preferredSoils": [
+"Black",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 28,
+"minHumidity": 35,
+"maxHumidity": 65,
+"idealRainfall": 350,
+"marketPricePerQuintal": 5440,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 110,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Maize",
+"Soybean"
+],
+"avoidPreviousCrops": [
+"Chickpea"
+]
+},
+{
+"cropName": "Pigeon Pea",
+"category": "Pulse",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Black",
+"Loamy"
+],
+"minTemperature": 22,
+"maxTemperature": 35,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 650,
+"marketPricePerQuintal": 7000,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 160,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Finger Millet",
+"Cotton"
+],
+"avoidPreviousCrops": [
+"Pigeon Pea"
+]
+},
+{
+"cropName": "Green Gram",
+"category": "Pulse",
+"season": "Zaid",
+"preferredSoils": [
+"Loamy",
+"Alluvial",
+"Sandy"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 300,
+"marketPricePerQuintal": 8550,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 65,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Wheat",
+"Rice"
+],
+"avoidPreviousCrops": [
+"Green Gram"
+]
+},
+{
+"cropName": "Black Gram",
+"category": "Pulse",
+"season": "Kharif",
+"preferredSoils": [
+"Clay",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 25,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 650,
+"marketPricePerQuintal": 6950,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 75,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Wheat",
+"Sorghum"
+],
+"avoidPreviousCrops": [
+"Black Gram"
+]
+},
+{
+"cropName": "Lentil",
+"category": "Pulse",
+"season": "Rabi",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 12,
+"maxTemperature": 25,
+"minHumidity": 45,
+"maxHumidity": 70,
+"idealRainfall": 400,
+"marketPricePerQuintal": 6425,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 120,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Rice",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Lentil"
+]
+},
+{
+"cropName": "Cowpea",
+"category": "Pulse",
+"season": "Zaid",
+"preferredSoils": [
+"Sandy",
+"Red",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 36,
+"minHumidity": 45,
+"maxHumidity": 75,
+"idealRainfall": 450,
+"marketPricePerQuintal": 5600,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 70,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Wheat",
+"Barley"
+],
+"avoidPreviousCrops": [
+"Cowpea"
+]
+},
+{
+"cropName": "Horse Gram",
+"category": "Pulse",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Laterite",
+"Sandy"
+],
+"minTemperature": 20,
+"maxTemperature": 32,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 350,
+"marketPricePerQuintal": 4800,
+"marketDemand": "Low",
+"waterRequirement": "Low",
+"growingDurationDays": 90,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Finger Millet",
+"Groundnut"
+],
+"avoidPreviousCrops": [
+"Horse Gram"
+]
+},
+{
+"cropName": "Field Pea",
+"category": "Pulse",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 22,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 450,
+"marketPricePerQuintal": 4750,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 100,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Cotton"
+],
+"avoidPreviousCrops": [
+"Field Pea"
+]
+},
+{
+"cropName": "Moth Bean",
+"category": "Pulse",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Red"
+],
+"minTemperature": 26,
+"maxTemperature": 40,
+"minHumidity": 30,
+"maxHumidity": 60,
+"idealRainfall": 250,
+"marketPricePerQuintal": 6200,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 75,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Sesame"
+],
+"avoidPreviousCrops": [
+"Moth Bean"
+]
+},
+{
+"cropName": "Soybean",
+"category": "Oilseed",
+"season": "Kharif",
+"preferredSoils": [
+"Black",
+"Loamy"
+],
+"minTemperature": 22,
+"maxTemperature": 30,
+"minHumidity": 60,
+"maxHumidity": 80,
+"idealRainfall": 700,
+"marketPricePerQuintal": 4600,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 105,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cotton",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Soybean"
+]
+},
+{
+"cropName": "Groundnut",
+"category": "Oilseed",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Red",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 33,
+"minHumidity": 55,
+"maxHumidity": 75,
+"idealRainfall": 600,
+"marketPricePerQuintal": 6783,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 120,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Sorghum",
+"Pearl Millet"
+],
+"avoidPreviousCrops": [
+"Groundnut"
+]
+},
+{
+"cropName": "Mustard",
+"category": "Oilseed",
+"season": "Rabi",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Sandy"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 350,
+"marketPricePerQuintal": 5650,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 125,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Maize",
+"Fallow"
+],
+"avoidPreviousCrops": [
+"Mustard"
+]
+},
+{
+"cropName": "Sesame",
+"category": "Oilseed",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 45,
+"maxHumidity": 75,
+"idealRainfall": 500,
+"marketPricePerQuintal": 8600,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 85,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cotton",
+"Sorhgum"
+],
+"avoidPreviousCrops": [
+"Sesame"
+]
+},
+{
+"cropName": "Sunflower",
+"category": "Oilseed",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Black",
+"Alluvial"
+],
+"minTemperature": 18,
+"maxTemperature": 32,
+"minHumidity": 45,
+"maxHumidity": 70,
+"idealRainfall": 500,
+"marketPricePerQuintal": 6760,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 95,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Groundnut"
+],
+"avoidPreviousCrops": [
+"Sunflower"
+]
+},
+{
+"cropName": "Safflower",
+"category": "Oilseed",
+"season": "Rabi",
+"preferredSoils": [
+"Black",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 30,
+"minHumidity": 35,
+"maxHumidity": 65,
+"idealRainfall": 300,
+"marketPricePerQuintal": 5800,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 130,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Sorghum",
+"Pearl Millet"
+],
+"avoidPreviousCrops": [
+"Safflower"
+]
+},
+{
+"cropName": "Linseed",
+"category": "Oilseed",
+"season": "Rabi",
+"preferredSoils": [
+"Clay",
+"Black",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 26,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 450,
+"marketPricePerQuintal": 5500,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 130,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Rice",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Linseed"
+]
+},
+{
+"cropName": "Castor",
+"category": "Oilseed",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 550,
+"marketPricePerQuintal": 6800,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 150,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Cotton"
+],
+"avoidPreviousCrops": [
+"Castor"
+]
+},
+{
+"cropName": "Niger",
+"category": "Oilseed",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Laterite"
+],
+"minTemperature": 18,
+"maxTemperature": 30,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 750,
+"marketPricePerQuintal": 5300,
+"marketDemand": "Low",
+"waterRequirement": "Low",
+"growingDurationDays": 100,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Finger Millet",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Niger"
+]
+},
+{
+"cropName": "Potato",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 24,
+"minHumidity": 65,
+"maxHumidity": 85,
+"idealRainfall": 500,
+"marketPricePerQuintal": 1800,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 90,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Rice",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Tomato",
+"Potato"
+]
+},
+{
+"cropName": "Tomato",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 18,
+"maxTemperature": 30,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 600,
+"marketPricePerQuintal": 2500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 75,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cabbage",
+"Cauliflower"
+],
+"avoidPreviousCrops": [
+"Potato",
+"Brinjal"
+]
+},
+{
+"cropName": "Onion",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial",
+"Sandy"
+],
+"minTemperature": 15,
+"maxTemperature": 32,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2800,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 130,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Maize",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Garlic",
+"Onion"
+]
+},
+{
+"cropName": "Brinjal",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Clay",
+"Alluvial"
+],
+"minTemperature": 22,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 800,
+"marketPricePerQuintal": 2000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 110,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes",
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Tomato",
+"Potato"
+]
+},
+{
+"cropName": "Cabbage",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 24,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 500,
+"marketPricePerQuintal": 1600,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 90,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Cauliflower",
+"Radish"
+]
+},
+{
+"cropName": "Cauliflower",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 500,
+"marketPricePerQuintal": 1900,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 85,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Paddy",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Cabbage",
+"Radish"
+]
+},
+{
+"cropName": "Okra",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Sandy",
+"Alluvial"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 700,
+"marketPricePerQuintal": 2400,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 65,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cowpea",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Cotton",
+"Okra"
+]
+},
+{
+"cropName": "Bottle Gourd",
+"category": "Vegetable",
+"season": "Zaid",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 35,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 400,
+"marketPricePerQuintal": 1500,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 70,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Wheat",
+"Barley"
+],
+"avoidPreviousCrops": [
+"Bitter Gourd",
+"Cucumber"
+]
+},
+{
+"cropName": "Bitter Gourd",
+"category": "Vegetable",
+"season": "Zaid",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 450,
+"marketPricePerQuintal": 2800,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 65,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Wheat",
+"Mustard"
+],
+"avoidPreviousCrops": [
+"Bottle Gourd"
+]
+},
+{
+"cropName": "Watermelon",
+"category": "Fruit",
+"season": "Zaid",
+"preferredSoils": [
+"Sandy",
+"Alluvial"
+],
+"minTemperature": 25,
+"maxTemperature": 40,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 300,
+"marketPricePerQuintal": 1400,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 90,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Wheat",
+"Chickpea"
+],
+"avoidPreviousCrops": [
+"Muskmelon",
+"Cucumber"
+]
+},
+{
+"cropName": "Muskmelon",
+"category": "Fruit",
+"season": "Zaid",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 26,
+"maxTemperature": 38,
+"minHumidity": 45,
+"maxHumidity": 75,
+"idealRainfall": 300,
+"marketPricePerQuintal": 2200,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 85,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Mustard",
+"Wheat"
+],
+"avoidPreviousCrops": [
+"Watermelon"
+]
+},
+{
+"cropName": "Cucumber",
+"category": "Vegetable",
+"season": "Zaid",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 22,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 400,
+"marketPricePerQuintal": 1800,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 60,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Wheat",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Bottle Gourd",
+"Pumpkin"
+]
+},
+{
+"cropName": "Pumpkin",
+"category": "Vegetable",
+"season": "Zaid",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 36,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 500,
+"marketPricePerQuintal": 1300,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 100,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Barley",
+"Chickpea"
+],
+"avoidPreviousCrops": [
+"Cucumber",
+"Squash"
+]
+},
+{
+"cropName": "Spinach",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2000,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 45,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Beetroot"
+]
+},
+{
+"cropName": "Radish",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 26,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 450,
+"marketPricePerQuintal": 1500,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 50,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Rice",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Turnip",
+"Cabbage"
+]
+},
+{
+"cropName": "Carrot",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 10,
+"maxTemperature": 22,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 450,
+"marketPricePerQuintal": 2100,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 95,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes",
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Radish"
+]
+},
+{
+"cropName": "French Bean",
+"category": "Vegetable",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 28,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 600,
+"marketPricePerQuintal": 4500,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 75,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Maize",
+"Cereal"
+],
+"avoidPreviousCrops": [
+"French Bean"
+]
+},
+{
+"cropName": "Garlic",
+"category": "Spice",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 25,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 9500,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 140,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Maize",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Onion",
+"Garlic"
+]
+},
+{
+"cropName": "Ginger",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Laterite",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 32,
+"minHumidity": 70,
+"maxHumidity": 95,
+"idealRainfall": 1500,
+"marketPricePerQuintal": 6500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 240,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes",
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Ginger",
+"Turmeric"
+]
+},
+{
+"cropName": "Turmeric",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 35,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 11200,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 260,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Pulses",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Turmeric",
+"Ginger"
+]
+},
+{
+"cropName": "Coriander",
+"category": "Spice",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 27,
+"minHumidity": 45,
+"maxHumidity": 70,
+"idealRainfall": 350,
+"marketPricePerQuintal": 7200,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 110,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Maize",
+"Soybean"
+],
+"avoidPreviousCrops": [
+"Coriander"
+]
+},
+{
+"cropName": "Cumin",
+"category": "Spice",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 18,
+"maxTemperature": 28,
+"minHumidity": 30,
+"maxHumidity": 60,
+"idealRainfall": 200,
+"marketPricePerQuintal": 24000,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 115,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Cluster Bean"
+],
+"avoidPreviousCrops": [
+"Cumin",
+"Fennel"
+]
+},
+{
+"cropName": "Fennel",
+"category": "Spice",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 30,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 400,
+"marketPricePerQuintal": 16000,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 180,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Green Gram",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Cumin",
+"Fennel"
+]
+},
+{
+"cropName": "Fenugreek",
+"category": "Spice",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 45,
+"maxHumidity": 75,
+"idealRainfall": 350,
+"marketPricePerQuintal": 5800,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 120,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Cotton"
+],
+"avoidPreviousCrops": [
+"Fenugreek"
+]
+},
+{
+"cropName": "Black Pepper",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Red",
+"Loamy"
+],
+"minTemperature": 22,
+"maxTemperature": 32,
+"minHumidity": 75,
+"maxHumidity": 95,
+"idealRainfall": 2500,
+"marketPricePerQuintal": 52000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 270,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Coffee",
+"Arecanut"
+],
+"avoidPreviousCrops": [
+"Black Pepper"
+]
+},
+{
+"cropName": "Cardamom",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 32,
+"minHumidity": 80,
+"maxHumidity": 98,
+"idealRainfall": 3000,
+"marketPricePerQuintal": 140000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 300,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Forest Trees"
+],
+"avoidPreviousCrops": [
+"Cardamom"
+]
+},
+{
+"cropName": "Cotton",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Black",
+"Alluvial"
+],
+"minTemperature": 21,
+"maxTemperature": 35,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 700,
+"marketPricePerQuintal": 7100,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 160,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Soybean",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Cotton",
+"Okra"
+]
+},
+{
+"cropName": "Sugarcane",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Clay"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1400,
+"marketPricePerQuintal": 315,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 330,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Green Gram",
+"Dhaincha"
+],
+"avoidPreviousCrops": [
+"Sugarcane"
+]
+},
+{
+"cropName": "Jute",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Clay"
+],
+"minTemperature": 24,
+"maxTemperature": 38,
+"minHumidity": 75,
+"maxHumidity": 95,
+"idealRainfall": 1600,
+"marketPricePerQuintal": 5050,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 120,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Rice",
+"Potato"
+],
+"avoidPreviousCrops": [
+"Jute"
+]
+},
+{
+"cropName": "Tobacco",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 20,
+"maxTemperature": 32,
+"minHumidity": 55,
+"maxHumidity": 75,
+"idealRainfall": 500,
+"marketPricePerQuintal": 12500,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 130,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Paddy",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Tobacco",
+"Potato"
+]
+},
+{
+"cropName": "Tea",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 30,
+"minHumidity": 75,
+"maxHumidity": 95,
+"idealRainfall": 2000,
+"marketPricePerQuintal": 18000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Shade Trees"
+],
+"avoidPreviousCrops": [
+"Tea"
+]
+},
+{
+"cropName": "Coffee",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Red",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 28,
+"minHumidity": 70,
+"maxHumidity": 90,
+"idealRainfall": 1800,
+"marketPricePerQuintal": 22000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Silver Oak",
+"Pepper"
+],
+"avoidPreviousCrops": [
+"Coffee"
+]
+},
+{
+"cropName": "Rubber",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 35,
+"minHumidity": 80,
+"maxHumidity": 95,
+"idealRainfall": 2200,
+"marketPricePerQuintal": 16500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Cover Crops"
+],
+"avoidPreviousCrops": [
+"Rubber"
+]
+},
+{
+"cropName": "Coconut",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Laterite",
+"Alluvial"
+],
+"minTemperature": 20,
+"maxTemperature": 35,
+"minHumidity": 70,
+"maxHumidity": 90,
+"idealRainfall": 2000,
+"marketPricePerQuintal": 3200,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Banana",
+"Cocoa"
+],
+"avoidPreviousCrops": [
+"Coconut"
+]
+},
+{
+"cropName": "Arecanut",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Red",
+"Loamy"
+],
+"minTemperature": 14,
+"maxTemperature": 36,
+"minHumidity": 75,
+"maxHumidity": 95,
+"idealRainfall": 2200,
+"marketPricePerQuintal": 45000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Black Pepper",
+"Betel Vine"
+],
+"avoidPreviousCrops": [
+"Arecanut"
+]
+},
+{
+"cropName": "Mango",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Red"
+],
+"minTemperature": 24,
+"maxTemperature": 38,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 6000,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes",
+"Vegetables"
+],
+"avoidPreviousCrops": [
+"Mango"
+]
+},
+{
+"cropName": "Banana",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Clay"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 75,
+"maxHumidity": 90,
+"idealRainfall": 1500,
+"marketPricePerQuintal": 2500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 300,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes",
+"Vegetables"
+],
+"avoidPreviousCrops": [
+"Banana"
+]
+},
+{
+"cropName": "Citrus Limon",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Sandy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 4500,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cover Crops",
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Citrus"
+]
+},
+{
+"cropName": "Guava",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy",
+"Black"
+],
+"minTemperature": 15,
+"maxTemperature": 38,
+"minHumidity": 45,
+"maxHumidity": 80,
+"idealRainfall": 900,
+"marketPricePerQuintal": 3500,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes",
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Guava"
+]
+},
+{
+"cropName": "Papaya",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 2800,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 270,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Vegetables",
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Papaya",
+"Tomato"
+]
+},
+{
+"cropName": "Pomegranate",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Sandy",
+"Black"
+],
+"minTemperature": 18,
+"maxTemperature": 38,
+"minHumidity": 35,
+"maxHumidity": 65,
+"idealRainfall": 500,
+"marketPricePerQuintal": 8500,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes",
+"Millets"
+],
+"avoidPreviousCrops": [
+"Pomegranate"
+]
+},
+{
+"cropName": "Pineapple",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Loamy",
+"Sandy"
+],
+"minTemperature": 22,
+"maxTemperature": 32,
+"minHumidity": 70,
+"maxHumidity": 90,
+"idealRainfall": 1400,
+"marketPricePerQuintal": 3800,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Orchard Cover"
+],
+"avoidPreviousCrops": [
+"Pineapple"
+]
+},
+{
+"cropName": "Grape",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Sandy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 40,
+"maxHumidity": 70,
+"idealRainfall": 600,
+"marketPricePerQuintal": 6500,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 160,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Green Manure"
+],
+"avoidPreviousCrops": [
+"Grape"
+]
+},
+{
+"cropName": "Apple",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": -2,
+"maxTemperature": 25,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1100,
+"marketPricePerQuintal": 9500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Cover Grass"
+],
+"avoidPreviousCrops": [
+"Apple"
+]
+},
+{
+"cropName": "Litchi",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 70,
+"maxHumidity": 90,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 7500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Litchi"
+]
+},
+{
+"cropName": "Jackfruit",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Red",
+"Loamy"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 1500,
+"marketPricePerQuintal": 2500,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Spices",
+"Vegetables"
+],
+"avoidPreviousCrops": [
+"Jackfruit"
+]
+},
+{
+"cropName": "Custard Apple",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Sandy",
+"Loamy"
+],
+"minTemperature": 20,
+"maxTemperature": 40,
+"minHumidity": 40,
+"maxHumidity": 75,
+"idealRainfall": 700,
+"marketPricePerQuintal": 4000,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Millets",
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Custard Apple"
+]
+},
+{
+"cropName": "Sapota",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Sandy",
+"Loamy"
+],
+"minTemperature": 18,
+"maxTemperature": 38,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1250,
+"marketPricePerQuintal": 3800,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Vegetables"
+],
+"avoidPreviousCrops": [
+"Sapota"
+]
+},
+{
+"cropName": "Amla",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Black",
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 40,
+"minHumidity": 45,
+"maxHumidity": 80,
+"idealRainfall": 800,
+"marketPricePerQuintal": 3200,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pulses",
+"Oilseeds"
+],
+"avoidPreviousCrops": [
+"Amla"
+]
+},
+{
+"cropName": "Ber",
+"category": "Fruit",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Red",
+"Black"
+],
+"minTemperature": 20,
+"maxTemperature": 45,
+"minHumidity": 30,
+"maxHumidity": 70,
+"idealRainfall": 400,
+"marketPricePerQuintal": 3000,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Millets"
+],
+"avoidPreviousCrops": [
+"Ber"
+]
+},
+{
+"cropName": "Peach",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 5,
+"maxTemperature": 30,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 6000,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cover Crops"
+],
+"avoidPreviousCrops": [
+"Peach"
+]
+},
+{
+"cropName": "Plum",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 4,
+"maxTemperature": 28,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 5500,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cover Crops"
+],
+"avoidPreviousCrops": [
+"Plum"
+]
+},
+{
+"cropName": "Pear",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 5,
+"maxTemperature": 28,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1050,
+"marketPricePerQuintal": 6200,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Cover Crops"
+],
+"avoidPreviousCrops": [
+"Pear"
+]
+},
+{
+"cropName": "Strawberry",
+"category": "Fruit",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 65,
+"maxHumidity": 85,
+"idealRainfall": 800,
+"marketPricePerQuintal": 15000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 120,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Solanaceous Crops"
+]
+},
+{
+"cropName": "Sweet Potato",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 21,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 800,
+"marketPricePerQuintal": 2200,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 120,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cereals",
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Sweet Potato"
+]
+},
+{
+"cropName": "Tapioca",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Red",
+"Sandy"
+],
+"minTemperature": 22,
+"maxTemperature": 36,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 1800,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 240,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Tapioca"
+]
+},
+{
+"cropName": "Yam",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Loamy"
+],
+"minTemperature": 25,
+"maxTemperature": 38,
+"minHumidity": 70,
+"maxHumidity": 90,
+"idealRainfall": 1500,
+"marketPricePerQuintal": 3500,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 270,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Yam"
+]
+},
+{
+"cropName": "Colocasia",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Clay",
+"Loamy"
+],
+"minTemperature": 21,
+"maxTemperature": 35,
+"minHumidity": 70,
+"maxHumidity": 95,
+"idealRainfall": 1300,
+"marketPricePerQuintal": 3000,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 200,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Colocasia"
+]
+},
+{
+"cropName": "Bitter Gourd Local",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Sandy"
+],
+"minTemperature": 24,
+"maxTemperature": 37,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 750,
+"marketPricePerQuintal": 2600,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 75,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Maize"
+],
+"avoidPreviousCrops": [
+"Cucurbits"
+]
+},
+{
+"cropName": "Ridge Gourd",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 22,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 700,
+"marketPricePerQuintal": 2300,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 70,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Bottle Gourd"
+]
+},
+{
+"cropName": "Sponge Gourd",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 23,
+"maxTemperature": 36,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 700,
+"marketPricePerQuintal": 2200,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 70,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Maize"
+],
+"avoidPreviousCrops": [
+"Ridge Gourd"
+]
+},
+{
+"cropName": "Snake Gourd",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 24,
+"maxTemperature": 37,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 900,
+"marketPricePerQuintal": 2000,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 80,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Cucurbits"
+]
+},
+{
+"cropName": "Ash Gourd",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 22,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 800,
+"marketPricePerQuintal": 1800,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 100,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Cucurbits"
+]
+},
+{
+"cropName": "Cluster Bean",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 25,
+"maxTemperature": 40,
+"minHumidity": 40,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 4200,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 90,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Sorghum"
+],
+"avoidPreviousCrops": [
+"Cluster Bean"
+]
+},
+{
+"cropName": "Drumstick",
+"category": "Vegetable",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Red"
+],
+"minTemperature": 25,
+"maxTemperature": 40,
+"minHumidity": 45,
+"maxHumidity": 80,
+"idealRainfall": 750,
+"marketPricePerQuintal": 3500,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 180,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Drumstick"
+]
+},
+{
+"cropName": "Curry Leaf",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Red",
+"Loamy",
+"Sandy"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 50,
+"maxHumidity": 80,
+"idealRainfall": 800,
+"marketPricePerQuintal": 4500,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Curry Leaf"
+]
+},
+{
+"cropName": "Mint",
+"category": "Spice",
+"season": "Zaid",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 20,
+"maxTemperature": 35,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 900,
+"marketPricePerQuintal": 6000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 90,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Mint"
+]
+},
+{
+"cropName": "Betel Vine",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Clay",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 80,
+"maxHumidity": 98,
+"idealRainfall": 2000,
+"marketPricePerQuintal": 25000,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Arecanut"
+],
+"avoidPreviousCrops": [
+"Betel Vine"
+]
+},
+{
+"cropName": "Mulberry",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 20,
+"maxTemperature": 35,
+"minHumidity": 65,
+"maxHumidity": 85,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 3000,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Mulberry"
+]
+},
+{
+"cropName": "Sisal",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Red",
+"Laterite"
+],
+"minTemperature": 22,
+"maxTemperature": 38,
+"minHumidity": 40,
+"maxHumidity": 75,
+"idealRainfall": 600,
+"marketPricePerQuintal": 4500,
+"marketDemand": "Low",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Millets"
+],
+"avoidPreviousCrops": [
+"Sisal"
+]
+},
+{
+"cropName": "Vanilla",
+"category": "Spice",
+"season": "Kharif",
+"preferredSoils": [
+"Laterite",
+"Loamy"
+],
+"minTemperature": 21,
+"maxTemperature": 32,
+"minHumidity": 80,
+"maxHumidity": 95,
+"idealRainfall": 2500,
+"marketPricePerQuintal": 350000,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Trees"
+],
+"avoidPreviousCrops": [
+"Vanilla"
+]
+},
+{
+"cropName": "Stevia",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 15,
+"maxTemperature": 35,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 12000,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 120,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Stevia"
+]
+},
+{
+"cropName": "Lemongrass",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 1200,
+"marketPricePerQuintal": 4000,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Lemongrass"
+]
+},
+{
+"cropName": "Citronella",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Laterite"
+],
+"minTemperature": 20,
+"maxTemperature": 37,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 1500,
+"marketPricePerQuintal": 4500,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Citronella"
+]
+},
+{
+"cropName": "Palmarosa",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Sandy",
+"Red"
+],
+"minTemperature": 22,
+"maxTemperature": 38,
+"minHumidity": 55,
+"maxHumidity": 80,
+"idealRainfall": 900,
+"marketPricePerQuintal": 5000,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Palmarosa"
+]
+},
+{
+"cropName": "Ashwagandha",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Red"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 500,
+"marketPricePerQuintal": 14000,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 160,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Sorghum"
+],
+"avoidPreviousCrops": [
+"Ashwagandha"
+]
+},
+{
+"cropName": "Aloe Vera",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Red"
+],
+"minTemperature": 15,
+"maxTemperature": 40,
+"minHumidity": 30,
+"maxHumidity": 70,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2500,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 240,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Millets"
+],
+"avoidPreviousCrops": [
+"Aloe Vera"
+]
+},
+{
+"cropName": "Senna",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 22,
+"maxTemperature": 38,
+"minHumidity": 35,
+"maxHumidity": 65,
+"idealRainfall": 350,
+"marketPricePerQuintal": 6000,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 120,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Pulses"
+],
+"avoidPreviousCrops": [
+"Senna"
+]
+},
+{
+"cropName": "Isabgol",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 15,
+"maxTemperature": 30,
+"minHumidity": 35,
+"maxHumidity": 65,
+"idealRainfall": 250,
+"marketPricePerQuintal": 13000,
+"marketDemand": "High",
+"waterRequirement": "Low",
+"growingDurationDays": 110,
+"difficulty": "Moderate",
+"compatiblePreviousCrops": [
+"Pearl Millet",
+"Cluster Bean"
+],
+"avoidPreviousCrops": [
+"Isabgol"
+]
+},
+{
+"cropName": "Opium Poppy",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 450,
+"marketPricePerQuintal": 55000,
+"marketDemand": "High",
+"waterRequirement": "Medium",
+"growingDurationDays": 140,
+"difficulty": "Difficult",
+"compatiblePreviousCrops": [
+"Maize",
+"Green Gram"
+],
+"avoidPreviousCrops": [
+"Opium Poppy"
+]
+},
+{
+"cropName": "Cluster Bean Forage",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy"
+],
+"minTemperature": 24,
+"maxTemperature": 38,
+"minHumidity": 40,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2000,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 70,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Cluster Bean"
+]
+},
+{
+"cropName": "Berseem",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial",
+"Clay"
+],
+"minTemperature": 10,
+"maxTemperature": 25,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 450,
+"marketPricePerQuintal": 1800,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 180,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy",
+"Maize"
+],
+"avoidPreviousCrops": [
+"Berseem"
+]
+},
+{
+"cropName": "Lucerne",
+"category": "Commercial Crop",
+"season": "Rabi",
+"preferredSoils": [
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 12,
+"maxTemperature": 28,
+"minHumidity": 50,
+"maxHumidity": 75,
+"idealRainfall": 400,
+"marketPricePerQuintal": 2100,
+"marketDemand": "Medium",
+"waterRequirement": "Medium",
+"growingDurationDays": 200,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Cereals"
+],
+"avoidPreviousCrops": [
+"Lucerne"
+]
+},
+{
+"cropName": "Napier Grass",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Loamy",
+"Alluvial",
+"Clay"
+],
+"minTemperature": 20,
+"maxTemperature": 38,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 1000,
+"marketPricePerQuintal": 1500,
+"marketDemand": "High",
+"waterRequirement": "High",
+"growingDurationDays": 365,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Legumes"
+],
+"avoidPreviousCrops": [
+"Napier Grass"
+]
+},
+{
+"cropName": "Dhaincha",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Alluvial",
+"Clay",
+"Loamy"
+],
+"minTemperature": 25,
+"maxTemperature": 40,
+"minHumidity": 65,
+"maxHumidity": 90,
+"idealRainfall": 600,
+"marketPricePerQuintal": 2500,
+"marketDemand": "Medium",
+"waterRequirement": "High",
+"growingDurationDays": 50,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Dhaincha"
+]
+},
+{
+"cropName": "Sunn Hemp",
+"category": "Commercial Crop",
+"season": "Kharif",
+"preferredSoils": [
+"Sandy",
+"Loamy",
+"Alluvial"
+],
+"minTemperature": 22,
+"maxTemperature": 38,
+"minHumidity": 60,
+"maxHumidity": 85,
+"idealRainfall": 500,
+"marketPricePerQuintal": 3800,
+"marketDemand": "Medium",
+"waterRequirement": "Low",
+"growingDurationDays": 60,
+"difficulty": "Easy",
+"compatiblePreviousCrops": [
+"Sugarcane",
+"Paddy"
+],
+"avoidPreviousCrops": [
+"Sunn Hemp"
+]
+}
+]

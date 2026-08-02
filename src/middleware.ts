@@ -37,6 +37,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher:[
     '/api/user/:path*', 
-    '/api/farmData/:path*'
+    '/api/farmData/:path*',
+    '/api/soilData/:path*'
   ], 
 };

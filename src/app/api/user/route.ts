@@ -14,6 +14,12 @@ export async function GET(request: Request) {
     where: { id: userId },
   });
 
+  const soilData = await prisma.soilData.findFirst({
+    where: {
+      farmerId: userId,
+    },
+  });
+
   if (!user) {
     return NextResponse.json({ message: "User not found" }, { status: 404 });
   }
@@ -21,7 +27,14 @@ export async function GET(request: Request) {
   // Security: Remove password before sending to frontend
   const { password, ...userWithoutPassword } = user;
 
-  return NextResponse.json(userWithoutPassword);
+  const response = {
+    ...userWithoutPassword,
+    soilData,
+  };
+
+  return NextResponse.json(response);
+
+  // return NextResponse.json(userWithoutPassword);
 }
 
 export async function PATCH(request: Request) {
@@ -31,17 +44,14 @@ export async function PATCH(request: Request) {
     if (!body || Object.keys(body).length === 0) {
       return NextResponse.json(
         { message: "Request body is empty" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const userId = request.headers.get("x-user-id");
 
     if (!userId) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     const farmer = await prisma.farmer.update({
@@ -60,14 +70,14 @@ export async function PATCH(request: Request) {
         message: "Farmer profile updated successfully",
         farmer,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     return NextResponse.json(
       {
         message: `Could not update farmer profile, because of ${error}`,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -76,10 +86,7 @@ export async function DELETE(request: Request) {
     const userId = request.headers.get("x-user-id");
 
     if (!userId) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     const farmer = await prisma.farmer.delete({
@@ -93,7 +100,7 @@ export async function DELETE(request: Request) {
         message: "Farmer profile deleted successfully",
         farmer,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error(error);
@@ -102,7 +109,7 @@ export async function DELETE(request: Request) {
       {
         message: "Could not delete farmer profile",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

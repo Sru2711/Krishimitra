@@ -1,5 +1,9 @@
-"use client"
+"use client";
 
 export const getTokenFromLocalStorage = () => {
-    return localStorage.getItem("CurrentToken");
-}
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  return localStorage.getItem("CurrentToken");
+};

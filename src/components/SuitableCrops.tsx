@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 type Props = {
   modalOpen: boolean;
   onClose: () => void;
+  data:recommendDataType[]
 };
 
 // Define your crop data structure here or import it
@@ -17,16 +18,15 @@ type CropData = {
   unit: string;
 };
 
-const crops: CropData[] = [
-  { id: 1, name: "Soyabean", suitability: 94, marketPrice: 4800, unit: "qtl" },
-  { id: 2, name: "Cotton", suitability: 88, marketPrice: 7200, unit: "qtl" },
-  { id: 3, name: "Tur", suitability: 82, marketPrice: 9500, unit: "qtl" },
-  { id: 4, name: "Maize", suitability: 75, marketPrice: 2200, unit: "qtl" },
-];
+// const crops: CropData[] = [
+//   { id: 1, name: "Soyabean", suitability: 94, marketPrice: 4800, unit: "qtl" },
+//   { id: 2, name: "Cotton", suitability: 88, marketPrice: 7200, unit: "qtl" },
+//   { id: 3, name: "Tur", suitability: 82, marketPrice: 9500, unit: "qtl" },
+//   { id: 4, name: "Maize", suitability: 75, marketPrice: 2200, unit: "qtl" },
+// ];
 
-const SuitableCrops: React.FC<Props> = ({ modalOpen, onClose }) => {
+const SuitableCrops: React.FC<Props> = ({ modalOpen, onClose,data }) => {
   if (!modalOpen) return null;
-
   return createPortal(
     <div className="fixed inset-0 bg-black/45 z-[9999] flex items-center justify-center p-4">
       <div className="bg-advisory border border-black p-4 md:p-6 rounded-lg w-full max-w-xl lg:max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -39,15 +39,15 @@ const SuitableCrops: React.FC<Props> = ({ modalOpen, onClose }) => {
         {/* Crop Cards Section */}
         <div className="w-full">
           <div className="flex flex-col lg:flex-row gap-4 overflow-x-auto pb-4">
-            {crops.map((crop) => (
+            {data?.map((crop,index) => (
               <div
-                key={crop.id}
+                key={index}
                 className="bg-[#e7e1d4] border border-black p-4 rounded-xl flex flex-col gap-1 min-w-[150px] shadow-md"
               >
-                <h3 className="font-bold text-lg whitespace-nowrap">{crop.name}</h3>
-                <p className="font-bold text-recommendation text-xl">{crop.suitability}%</p>
+                <h3 className="font-bold text-lg whitespace-nowrap">{crop.cropName}</h3>
+                <p className="font-bold text-recommendation text-xl">{crop.confidence}%</p>
                 <p className="text-black font-medium text-sm">
-                  ₹{crop.marketPrice} / <span className="text-gray-600">price</span>
+                   {((crop.score / 500) * 100).toFixed(1)}% / <span className="text-gray-600"></span>
                 </p>
               </div>
             ))}

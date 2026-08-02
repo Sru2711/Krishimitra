@@ -11,11 +11,16 @@ import Alert from "@/src/assets/Alert.png";
 import AllClear from "@/src/assets/Allclear.png";
 import { weatherMenu } from "@/src/types/sidebarItems";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SuitableCrops from "@/src/components/SuitableCrops";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
-import { getWeatherInformation } from "@/src/services/Dashboard";
+import {
+  getSeason,
+  getWeatherInformation,
+  postTheUserDataForRecommendation,
+  postTheUserDataForWarning,
+} from "@/src/services/Dashboard";
 import { getWeatherData } from "@/src/features/Weather/weatherSlice";
 import { getCoords } from "@/src/components/CurrentLocation";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -23,14 +28,17 @@ import authSlice from "../../../features/Auth/authSlice";
 import { getUser } from "@/src/features/Auth/authSlice";
 import Plant from "@/src/assets/Plant.gif";
 import Flower from "@/src/assets/Flower.gif";
+import { getSoilDataApi } from "@/src/api";
+import { recommendDataType, SoilProperties } from "@/src/types/dasboard";
 
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
-  // const [cords, setCords] = useState({ latitude: 0, longitude: 0 });
-  // const [error, setError] = useState({});
   const [user, setUser] = useState({});
   const [recommendationState, setRecommendationState] = useState(false);
   const [fieldState, setFieldState] = useState(false);
+  const [reccomenData, setRecommendData] = useState<recommendDataType[]>([]);
+  const [warningData, setWarningData] = useState<any[]>([]);
+  const hasFetched = useRef(false);
 
   const dispatch = useDispatch();
   const userData = useAppSelector((state) => {
@@ -46,14 +54,8 @@ export default function Dashboard() {
     },
   );
 
-  // to get the coords
-  // useEffect(() => {
-  //   getCoords(setCords, setError);
-  // }, []);
-
-  //to get data
   useEffect(() => {
-    if (!userData?.latitude && userData?.longtitude) return;
+    if (userData?.latitude == null && userData?.longtitude == null) return;
     const fetchWeather = async () => {
       try {
         const data = await getWeatherInformation(
@@ -68,6 +70,83 @@ export default function Dashboard() {
 
     fetchWeather();
   }, [userData?.longtitude, userData?.latitude, dispatch]);
+
+  //
+
+  useEffect(() => {
+    if (hasFetched.current) return;
+
+    if (!userData?.soilData || !weatherDataa) return;
+    const soilProperties: SoilProperties = {
+      soilType: userData?.soilData?.soilType,
+      season: getSeason(),
+      temperature: weatherDataa?.current?.temperature_2m ?? 0,
+      humidity: weatherDataa?.current?.relative_humidity_2m ?? 0,
+      rainfall: weatherDataa?.current?.rain ?? 0,
+
+      fertilityLevel: userData?.soilData?.fertilityLevel ?? undefined,
+      soilPH: userData?.soilData?.soilPH
+        ? Number(userData?.soilData.soilPH)
+        : undefined,
+      organicCarbon: userData?.soilData?.organicCarbon
+        ? Number(userData?.soilData.organicCarbon)
+        : undefined,
+      clayPercentage: userData?.soilData?.clayPercentage
+        ? Number(userData?.soilData.clayPercentage)
+        : undefined,
+      sandPercentage: userData?.soilData?.sandPercentage
+        ? Number(userData?.soilData.sandPercentage)
+        : undefined,
+      siltPercentage: userData?.soilData?.siltPercentage
+        ? Number(userData?.soilData.siltPercentage)
+        : undefined,
+      cationExchangeCapacity: userData?.soilData?.cationExchangeCapacity
+        ? Number(userData?.soilData.cationExchangeCapacity)
+        : undefined,
+      nitrogen: userData?.soilData?.nitrogen
+        ? Number(userData?.soilData.nitrogen)
+        : undefined,
+      bulkDensity: userData?.soilData?.bulkDensity
+        ? Number(userData?.soilData.bulkDensity)
+        : undefined,
+      coarseFragments: userData?.soilData?.coarseFragments
+        ? Number(userData?.soilData.coarseFragments)
+        : undefined,
+    };
+    hasFetched.current = true;
+
+    const fetchRecommendationData = async () => {
+      try {
+        setRecommendationState(true);
+
+        const recommendationData = await postTheUserDataForRecommendation(
+          soilProperties,
+          userData.token,
+        );
+
+        setRecommendData(recommendationData.data);
+      }finally {
+        setRecommendationState(false);
+      }
+    };
+
+    const fetchWarningData = async () => {
+      try {
+        setFieldState(true);
+
+        const recommendationData = await postTheUserDataForWarning(
+          soilProperties,
+          userData.token,
+        );
+        setWarningData(recommendationData.data);
+      }finally {
+        setFieldState(false);
+      }
+    };
+    
+    fetchWarningData();
+    fetchRecommendationData();
+  }, [userData, weatherDataa]);
 
   const weatherData: weatherMenu = [
     {
@@ -102,24 +181,6 @@ export default function Dashboard() {
     },
   ];
 
-  const alerts = [
-    {
-      type: "danger",
-      message: "Heavy rain expected in next 2 hours",
-      icons: Warning,
-    },
-    {
-      type: "warning",
-      message: "Flooding risk in low-lying areas",
-      icons: Alert,
-    },
-    {
-      type: "info",
-      message: "Wind speeds reaching 40km/h",
-      icons: AllClear,
-    },
-  ];
-
   const handleModalOpen = () => {
     setModal((prev) => !prev);
   };
@@ -148,34 +209,75 @@ export default function Dashboard() {
                 <h1> Your Farm Location </h1>
               </div>
               <div className="w-full  p-2">
-                <MapComponent />
+                <MapComponent
+                  latitude={userData?.latitude}
+                  longitude={userData?.longtitude}
+                />
               </div>
             </div>
           </div>
           <div className="md:col-span-1 p-4 rounded-xl border-none bg-recommendation">
             {recommendationState ? (
               <div className="w-full h-full max-h-screen flex items-center justify-center">
-              <Image src={Plant} alt={"Loading..."} width={100} height={100} />
+                <Image
+                  src={Plant}
+                  alt={"Loading..."}
+                  width={100}
+                  height={100}
+                />
               </div>
             ) : (
               <div className="w-full border border-white p-2 rounded-lg">
                 <div className="w-full text-white text-md sm:text-lg md:text-xl lg:text-3xl font-semibold ">
-                  <h1 className="p-2 md:p-5">
-                    Best Crops for Today
-                  </h1>
+                  <h1 className="p-2 md:p-5">Best Crops for Today</h1>
                 </div>
 
                 <div className="w-full  p-4 flex flex-col ">
-                  <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                    <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                      Best Crops:
+                  {reccomenData?.slice(0, 1).map((ele) => (
+                    <div key={ele.cropName}>
+                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                          Best Crop:
+                        </div>
+
+                        <div className="w-2/3 text-white sm:text-md md:text-xl lg:text-2xl">
+                          {ele.cropName}
+                        </div>
+                      </div>
+
+                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                          Confidence:
+                        </div>
+
+                        <div className="w-2/3 text-white">{ele.confidence}</div>
+                      </div>
+
+                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                          Best Score:
+                        </div>
+
+                        <div className="w-2/3 text-white">
+                          {" "}
+                          {((ele.score / 500) * 100).toFixed(1)}%
+                        </div>
+                      </div>
+
+                      <div className="w-full p-2">
+                        <div className="text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                          Why?
+                        </div>
+
+                        <ul className="list-disc list-inside space-y-2 text-white mt-2">
+                          {ele.why.map((reason, index) => (
+                            <li key={index}>{reason}</li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <div className="w-2/3 sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-normal text-white">
-                      {" "}
-                      Soyabean
-                    </div>
-                  </div>
-                  <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                  ))}
+                  {/* <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
                     <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
                       Confidence:
                     </div>
@@ -205,7 +307,7 @@ export default function Dashboard() {
                         <li>High expected market demand and better profit.</li>
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="w-full mt-4 flex justify-center items-center">
@@ -270,11 +372,11 @@ export default function Dashboard() {
           </div>
           {fieldState ? (
             <div className="flex max-h-screen items-center justify-center">
-            <Image src={Flower} alt={"Loading..."} width={100} height={100} />
+              <Image src={Flower} alt={"Loading..."} width={100} height={100} />
             </div>
           ) : (
             <div className="flex flex-col gap-4 max-h-64 overflow-y-auto pr-2">
-              {alerts?.map((alert, index) => {
+              {warningData?.map((alert, index) => {
                 const alterType =
                   alert.type === "danger"
                     ? "bg-red-50 border-red-500 text-red-700"
@@ -305,7 +407,11 @@ export default function Dashboard() {
         </div>
       </div>
       {modal && (
-        <SuitableCrops modalOpen={modal} onClose={() => setModal(false)} />
+        <SuitableCrops
+          modalOpen={modal}
+          onClose={() => setModal(false)}
+          data={reccomenData.slice(1, 4)}
+        />
       )}
     </div>
   );
