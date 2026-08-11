@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FarmItem, menu } from "../types/sidebarItems";
 import Link from "next/link";
 import Image from "next/image";
@@ -22,14 +22,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getConversationalId } from "../services/chat";
 
 // ... your imports remain the same
 
 const Sidebar: React.FC = () => {
   const [collapse, setCollapse] = useState(true);
+  const [converstaionalId, setConverstaionalId] = useState<number | null>(null);
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const router = useRouter();
+
   const menuItems: menu = [
     { name: "Farm Overview", link: "/dashboard", icon: home },
     { name: "Farm Advisory", link: "/farmerAdvisory", icon: advisory },
@@ -43,11 +46,57 @@ const Sidebar: React.FC = () => {
     setCollapse((prev) => !prev);
   };
 
+  const renderMenuItemContent = (item: FarmItem) => {
+    // If collapsed, render nothing
+    if (collapse) {
+      return <></>;
+    }
+
+    // If not collapsed and it matches "Ask Krishimitra"
+    if (item?.name === "Ask Krishimitra") {
+      return (
+        <button
+          type="button"
+          className="text-lg font-medium whitespace-nowrap"
+          onClick={handleGetConversationId}
+        >
+          {item.name}
+        </button>
+      );
+    }
+
+    // Default fallback for everything else
+    return (
+      <span className="text-lg font-medium whitespace-nowrap">
+        {item?.name}
+      </span>
+    );
+  };
+
   const handleLogout = (): void => {
     localStorage.removeItem("CurrentToken");
     dispatch(logout());
     router.replace("/login");
   };
+
+  const handleGetConversationId = async () => {
+    let gotId = await getConversationalId()
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+    return setConverstaionalId(gotId);
+  };
+
+  // useEffect(() => {
+  //   if (!converstaionalId) return;
+  //   else {
+  //     router.push(`/askKrishiMitra/${converstaionalId}`);
+  //   }
+  // }, [converstaionalId]);
+
   return (
     <div
       className={`h-full flex flex-col ${collapse ? "w-[80px]" : "w-[280px]"} bg-advisory rounded-b-xl transition-all duration-300`}
@@ -85,30 +134,31 @@ const Sidebar: React.FC = () => {
               <li key={item.link}>
                 <Tooltip>
                   <TooltipTrigger>
-                      <Link
-                        href={item.link}
-                        className={`flex items-center ${
-                          collapse ? "justify-center" : "gap-4"
-                        } p-3 rounded-xl transition-all ${
-                          isActive
-                            ? "bg-recommendation/20 text-white"
-                            : "text-black/70 hover:bg-recommendation"
-                        }`}
-                      >
-                        <Image
-                          src={item.icon}
-                          alt={item.name}
-                          width={30}
-                          height={30}
-                          className="shrink-0 drop-shadow-md"
-                        />
+                    <Link
+                      href={item.link}
+                      className={`flex items-center ${
+                        collapse ? "justify-center" : "gap-4"
+                      } p-3 rounded-xl transition-all ${
+                        isActive
+                          ? "bg-recommendation/20 text-white"
+                          : "text-black/70 hover:bg-recommendation"
+                      }`}
+                    >
+                      <Image
+                        src={item.icon}
+                        alt={item.name}
+                        width={30}
+                        height={30}
+                        className="shrink-0 drop-shadow-md"
+                      />
+                      {!collapse && (
+                        <span className="text-lg font-medium whitespace-nowrap">
+                          {item?.name}
+                        </span>
+                      )}
 
-                        {!collapse && (
-                          <span className="text-lg font-medium whitespace-nowrap">
-                            {item.name}
-                          </span>
-                        )}
-                      </Link>
+                      {/* {renderMenuItemContent(item)} */}
+                    </Link>
                   </TooltipTrigger>
 
                   {collapse && (

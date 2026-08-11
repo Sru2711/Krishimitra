@@ -34,6 +34,7 @@ model Farmer {
   longtitude        Float?
   farmDataHistories FarmDataHistory[]
   soilDatas         soilData[]
+  conversations     Conversation[]
 
   @@map("farmers")
 }
@@ -72,4 +73,17 @@ model soilData {
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
   farmer                 Farmer    @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  farmerId  String
+  title     String   @default("New Chat")
+  messages  Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  farmer Farmer @relation(fields: [farmerId], references: [id])
+
+  @@index([farmerId])
 }

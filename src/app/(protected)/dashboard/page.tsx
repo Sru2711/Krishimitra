@@ -46,7 +46,7 @@ export default function Dashboard() {
   });
 
   const weatherDataa = useAppSelector((state) => state.weather.weatherData);
-
+  console.log("weatherDataa", weatherDataa);
   const MapComponent = dynamic(
     () => import("@/src/components/GoogleMapComponent"),
     {
@@ -125,7 +125,7 @@ export default function Dashboard() {
         );
 
         setRecommendData(recommendationData.data);
-      }finally {
+      } finally {
         setRecommendationState(false);
       }
     };
@@ -139,11 +139,11 @@ export default function Dashboard() {
           userData.token,
         );
         setWarningData(recommendationData.data);
-      }finally {
+      } finally {
         setFieldState(false);
       }
     };
-    
+
     fetchWarningData();
     fetchRecommendationData();
   }, [userData, weatherDataa]);
@@ -389,12 +389,12 @@ export default function Dashboard() {
                     key={index} // Using index is safer here
                     className={`p-3 rounded-lg border flex items-center gap-3 ${alterType}`}
                   >
-                    <Image
+                    {/* <Image
                       src={alert?.icons}
                       alt={alert?.type}
                       width={25}
                       height={20}
-                    />
+                    /> */}
                     {/* <span className="font-bold uppercase text-xs">
                     {alert.type}
                   </span> */}

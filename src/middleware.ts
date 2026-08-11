@@ -38,6 +38,9 @@ export const config = {
   matcher:[
     '/api/user/:path*', 
     '/api/farmData/:path*',
-    '/api/soilData/:path*'
+    '/api/soilData/:path*',
+    '/api/chat/:path*',
+    '/api/conversations/:path*',
+
   ], 
 };

@@ -1,5 +1,7 @@
 "use client";
 
+import EarnChart from "@/src/components/Charts/EarnChart";
+import YieldChart from "@/src/components/Charts/YieldChart";
 import FarmHistoryModal from "@/src/components/FarmHistoryModal";
 import { setFarmHistory } from "@/src/features/FarmHistory/FarmHistrySlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -12,9 +14,15 @@ import {
 import { FarmHistory as FarmHistoryType } from "@/src/types/farmer";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { True } from "../../../generated/prisma/internal/prismaNamespace";
+import { Accordion } from "@base-ui/react";
+import { ChevronDown } from "lucide-react";
 
 const FarmHistory = () => {
   const [modal, setModalOpen] = useState(false);
+  const [yieldTrue, setYieldTrue] = useState(true);
+  const [earnTrue, setEarnTrue] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const [farmHistoryData, setFarmHistoryData] = useState<FarmHistoryType>({
@@ -56,8 +64,20 @@ const FarmHistory = () => {
     fetchData();
   }, []);
 
+  const handleChartShow = (type: string) => {
+    switch (type) {
+      case "yield":
+        setEarnTrue(false);
+        setYieldTrue(true);
+        break;
+      case "earned":
+        setYieldTrue(false);
+        setEarnTrue(true);
+        break;
+    }
+  };
   return (
-    <div className="w-full flex flex-col p-4 md:p-6 bg-advisory min-h-screen">
+    <div className="w-full flex flex-col p-4 md:p-6 min-h-screen">
       <div className="w-full mb-6 flex flex-col md:flex-row justify-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-black">Farm Details</h1>
@@ -74,6 +94,107 @@ const FarmHistory = () => {
         </div>
       </div>
 
+      <Accordion.Root
+        // defaultValue="item-1"
+        className="w-full h-auto mb-4 rounded-xl"
+      >
+        <Accordion.Item value="item-1">
+          <Accordion.Header>
+            <Accordion.Trigger className="flex w-full items-center justify-between rounded-md bg-recommendation p-3 text-white text-lg font-bold">
+              <span>Your Farm Performance Over Time</span>
+              <ChevronDown className="transition-transform duration-200 group-data-[panel-open]:rotate-180" size={20} />
+            </Accordion.Trigger>
+          </Accordion.Header>
+
+          <Accordion.Panel className="p-3">
+            <div className="w-full h-auto bg-white border border-black p-1 mbe-4 rounded-xl">
+              <div className="w-full  p-2 flex flex-col sm:flex-row gap-4">
+                <button
+                  className="border-2 border-white bg-recommendation p-3 text-white rounded-sm text-lg cursor-grab"
+                  onClick={() => {
+                    handleChartShow("yield");
+                  }}
+                >
+                  Yield Trend
+                </button>
+                <button
+                  className="border-2 border-white bg-recommendation p-3 text-white rounded-sm text-lg cursor-grab"
+                  onClick={() => {
+                    handleChartShow("earned");
+                  }}
+                >
+                  Earnings Trend
+                </button>
+              </div>
+
+              <div className="w-full rounded-2xl bg-white shadow-md p-6">
+                {yieldTrue && (
+                  <>
+                    <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+                      🌾 Past Harvest Performance
+                    </h2>
+
+                    <YieldChart data={farmHistory} />
+                  </>
+                )}
+
+                {earnTrue && (
+                  <>
+                    <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+                      💰 Profit Trend
+                    </h2>
+
+                    <EarnChart data={farmHistory} />
+                  </>
+                )}
+              </div>
+            </div>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>
+
+      {/* <div className="w-full h-auto bg-white border border-black p-4 mbe-4 rounded-xl">
+        <div className="w-full  p-2 flex gap-4">
+          <button
+            className="border-2 border-white bg-recommendation p-3 text-white rounded-sm text-lg cursor-grab"
+            onClick={() => {
+              handleChartShow("yield");
+            }}
+          >
+            Yield Trend
+          </button>
+          <button
+            className="border-2 border-white bg-recommendation p-3 text-white rounded-sm text-lg cursor-grab"
+            onClick={() => {
+              handleChartShow("earned");
+            }}
+          >
+            Earnings Trend
+          </button>
+        </div>
+
+        <div className="w-full rounded-2xl bg-white shadow-md p-6">
+          {yieldTrue && (
+            <>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                🌾 Past Harvest Performance
+              </h2>
+
+              <YieldChart data={farmHistory} />
+            </>
+          )}
+
+          {earnTrue && (
+            <>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                💰 Profit Trend
+              </h2>
+
+              <EarnChart data={farmHistory} />
+            </>
+          )}
+        </div>
+      </div> */}
       <div className="w-full border border-black rounded-xl overflow-hidden shadow-lg bg-white p-4">
         <div className="p-4 border-b border-black bg-white">
           <h2 className="text-2xl font-semibold text-black">Crop Records</h2>
@@ -108,13 +229,19 @@ const FarmHistory = () => {
                         <h2 className="text-md sm:text-xl font-medium">
                           Price:{" "}
                         </h2>
-                        <p className="text-md text-medium">{"₹"}{data?.price}</p>
+                        <p className="text-md text-medium">
+                          {"₹"}
+                          {data?.price}
+                        </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 whitespace-nowrap">
                         <h2 className="text-md sm:text-xl font-medium">
                           Earned :{" "}
                         </h2>
-                        <p className="text-md text-medium">{"₹"}{data?.earned}</p>
+                        <p className="text-md text-medium">
+                          {"₹"}
+                          {data?.earned}
+                        </p>
                       </div>
                     </div>
                     <div className=" mt-5 flex-1 flex flex-col sm:flex-row gap-3 h-12.5">
@@ -227,10 +354,12 @@ const FarmHistory = () => {
                       {data?.cropYield}/{"q"}
                     </td>
                     <td className="p-4 text-lg text-gray-800 font-semibold">
-                      {"₹"}{data?.price}
+                      {"₹"}
+                      {data?.price}
                     </td>
                     <td className="p-4 text-lg text-gray-800 font-semibold">
-                      {"₹"}{data?.earned}
+                      {"₹"}
+                      {data?.earned}
                     </td>
                     <td className="p-4 text-lg text-gray-800 font-semibold">
                       <div className="flex items-center gap-2">
