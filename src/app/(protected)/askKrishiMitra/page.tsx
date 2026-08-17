@@ -7,29 +7,25 @@ import { ClipboardList, SquarePen } from "lucide-react";
 import { getConversationalId } from "@/src/services/chat";
 import { useRouter } from "next/navigation";
 
-
 const MainAskKrishiMitra = () => {
-
   // const [converstaionalId, setConverstaionalId] = useState<number | null>(null);
   const router = useRouter();
 
   const handleGetConversationId = async () => {
-  try {
-    const response = await getConversationalId();
-
-    const conversationId = response?.data;
-
-    if (conversationId) {
-      router.push(`/askKrishiMitra/${conversationId}`);
+    try {
+      const response = await getConversationalId();
+      const conversationId = response?.conversationId?.id;
+      if (conversationId) {
+        router.push(`/askKrishiMitra/newChat/${conversationId}`);
+      }
+    } catch (error) {
+      console.error("Failed to get conversation ID:", error);
     }
-  } catch (error) {
-    console.error("Failed to get conversation ID:", error);
-  }
-};
+  };
 
- const handleNavigateToMessageList = async() =>{
-   router.push("/askKrishiMitra/history")
- }
+  const handleNavigateToMessageList = async () => {
+    router.push("/askKrishiMitra/history");
+  };
 
   return (
     // <>
@@ -45,7 +41,9 @@ const MainAskKrishiMitra = () => {
         <button
           type="submit"
           className="group rounded-2xl border-2 hover:border-advisory border-black bg-advisory px-8 py-4 shadow-xl transition-colors hover:bg-recommendation"
-         onClick={()=>{handleNavigateToMessageList()}}
+          onClick={() => {
+            handleNavigateToMessageList();
+          }}
         >
           <div className="flex flex-row gap-4">
             <ClipboardList
@@ -62,7 +60,9 @@ const MainAskKrishiMitra = () => {
         <button
           type="submit"
           className="group rounded-2xl border-2 hover:border-advisory border-black bg-advisory px-8 py-4 shadow-xl transition-colors hover:bg-recommendation"
-         onClick={()=>{handleGetConversationId()}}
+          onClick={() => {
+            handleGetConversationId();
+          }}
         >
           <div className="flex flex-row gap-4">
             <SquarePen

@@ -14,6 +14,8 @@ import {
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getCoords } from "@/src/components/CurrentLocation";
+import Image from "next/image";
+import krishimitraLogo from "@/src/assets/Logo.png"
 
 export default function RegisterPage() {
   const dispatch = useAppDispatch();
@@ -126,7 +128,10 @@ export default function RegisterPage() {
         apiProvider: "ISRIC SoilGrids",
       };
 
-      const saveResponse = await postTheSoilData(soilPayload,registerData.token);
+      const saveResponse = await postTheSoilData(
+        soilPayload,
+        registerData.token,
+      );
 
       if (saveResponse?.status === 200) {
         toast.success(saveResponse.message);
@@ -144,11 +149,18 @@ export default function RegisterPage() {
 
   return (
     <main className="w-full min-h-screen bg-bg px-4 py-10 ">
-      <div className="mx-auto w-full max-w-5xl rounded-3xl bg-advisory shadow-2xl p-8 md:p-10 overflow-y-auto max-h-[90vh]">
+      <div className="mx-auto w-full max-w-5xl rounded-3xl bg-advisory shadow-2xl p-8 md:p-10 overflow-y-auto overflow-x-hidden max-h-[90vh]">
         <h1 className="text-3xl font-bold text-black text-center">
           Create Account
         </h1>
-
+        <div className="w-full flex items-center-safe justify-center-safe m-2">
+          <Image
+            src={krishimitraLogo}
+            alt="KrishMitra Logic"
+            width={45}
+            height={50}
+          />
+        </div>
         <p className="text-black/80 text-center mt-2">
           Register to get started
         </p>

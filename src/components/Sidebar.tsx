@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
 
   const menuItems: menu = [
     { name: "Farm Overview", link: "/dashboard", icon: home },
-    { name: "Farm Advisory", link: "/farmerAdvisory", icon: advisory },
+    // { name: "Farm Advisory", link: "/farmerAdvisory", icon: advisory },
     { name: "Ask Krishimitra", link: "/askKrishiMitra", icon: message },
     { name: "Farm Diary", link: "/farmHistory", icon: history },
     { name: "Farmer Profile", link: "/farmerProfile", icon: profile },

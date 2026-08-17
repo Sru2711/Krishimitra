@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn("font-sans", inter.variable)}>
-      <body className="flex flex-row h-dvh overflow-hidden">
+      <body className="flex flex-row h-dvh overflow-hidden farmer-scrollbar">
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

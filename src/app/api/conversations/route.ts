@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// Get all convo of a  particular farmer
 export async function GET(req: NextRequest) {
   const userId = req.headers.get("x-user-id");
 
@@ -48,6 +49,7 @@ export async function GET(req: NextRequest) {
       select: {
         id: true,
         title: true,
+        messages:true,
         createdAt: true,
         updatedAt: true,
       },

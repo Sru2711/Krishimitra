@@ -7,6 +7,8 @@ import { useAppDispatch } from "@/src/redux/hooks";
 import { getUser, sendUser } from "@/src/features/Auth/authSlice";
 import { login } from "@/src/services/auth";
 import { useRouter } from "next/navigation";
+import krishimitraLogo from "@/src/assets/Logo.png"
+import Image from "next/image";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -36,7 +38,14 @@ export default function LoginPage() {
         <h1 className="text-3xl font-bold text-black text-center">
           Welcome Back
         </h1>
-
+         <div className="w-full flex items-center-safe justify-center-safe m-2">
+          <Image
+          src={krishimitraLogo}
+           alt="KrishMitra Logic"
+           width={50}
+           height={50}
+          />
+         </div>
         <p className="text-black/80 text-center mt-2">Login to continue</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-8">

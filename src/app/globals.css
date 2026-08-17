@@ -142,3 +142,44 @@ body {
     @apply font-sans;
   }
 }
+
+/* globals.css */
+
+@layer utilities {
+  .farmer-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #2E7D32 transparent;
+  }
+
+  .farmer-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .farmer-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .farmer-scrollbar::-webkit-scrollbar-thumb {
+    background: #2E7D32;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .farmer-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #1B5E20;
+    background-clip: content-box;
+  }
+
+  /* Remove the up/down/left/right scrollbar buttons */
+  .farmer-scrollbar::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .farmer-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
