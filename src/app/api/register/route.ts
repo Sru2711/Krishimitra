@@ -5,6 +5,7 @@ import { generateToken } from "../helper";
 
 export async function POST(req: Request) {
   let body = await req?.json();
+  console.log("%%%%@##$$",body)
   if (!body || Object.keys(body).length === 0) {
     return NextResponse.json({ error: "Request Body Empty" }, { status: 400 });
   } else {

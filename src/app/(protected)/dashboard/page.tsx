@@ -16,6 +16,7 @@ import SuitableCrops from "@/src/components/SuitableCrops";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  collectAndSaveSoil,
   getSeason,
   getWeatherInformation,
   postTheUserDataForRecommendation,
@@ -30,6 +31,9 @@ import Plant from "@/src/assets/Plant.gif";
 import Flower from "@/src/assets/Flower.gif";
 import { getSoilDataApi } from "@/src/api";
 import { recommendDataType, SoilProperties } from "@/src/types/dasboard";
+import toast from "react-hot-toast";
+import axios from "axios";
+import message from '@/src/assets/Message.png';
 
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
@@ -41,12 +45,15 @@ export default function Dashboard() {
   const hasFetched = useRef(false);
 
   const dispatch = useDispatch();
+
   const userData = useAppSelector((state) => {
     return state?.auth?.user;
   });
 
+  const [soilDataCollected, setSoilDataCollected] = useState(false);
   const weatherDataa = useAppSelector((state) => state.weather.weatherData);
-  console.log("weatherDataa", weatherDataa);
+  console.log("userData", userData);
+
   const MapComponent = dynamic(
     () => import("@/src/components/GoogleMapComponent"),
     {
@@ -55,98 +62,420 @@ export default function Dashboard() {
   );
 
   useEffect(() => {
-    if (userData?.latitude == null && userData?.longtitude == null) return;
+    let cancelled = false;
+
+    const initializeSoil = async () => {
+      try {
+        const token = localStorage.getItem("CurrentToken");
+
+        if (!token) {
+          console.error("❌ AUTH TOKEN NOT FOUND");
+          return;
+        }
+
+        /*
+         * ========================================================
+         * GET LATEST USER
+         * ========================================================
+         */
+
+        console.log("👤 GETTING LATEST USER...");
+
+        const userResponse = await axios.get("/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const latestUser = userResponse.data;
+
+        console.log("👤 LATEST USER:", latestUser);
+
+        if (cancelled) return;
+
+        /*
+         * ========================================================
+         * IF SOIL ALREADY EXISTS
+         * DO NOT CALL SOILGRIDS AGAIN
+         * ========================================================
+         */
+
+        if (latestUser?.soilData) {
+          console.log("✅ SOIL ALREADY EXISTS");
+
+          dispatch(getUser(latestUser));
+
+          setSoilDataCollected(true);
+
+          return;
+        }
+
+        /*
+         * ========================================================
+         * SOIL DOES NOT EXIST
+         * ========================================================
+         */
+
+        console.log("⚠️ SOIL DATA IS MISSING");
+
+        if (
+          !Number.isFinite(latestUser?.latitude) ||
+          !Number.isFinite(latestUser?.longtitude)
+        ) {
+          throw new Error("Farm location is missing.");
+        }
+
+        toast.loading("Collecting your soil data...", {
+          id: "soil-retry",
+        });
+
+        /*
+         * ========================================================
+         * SOILGRIDS → SAVE DATABASE
+         * ========================================================
+         */
+
+        await collectAndSaveSoil(
+          latestUser.latitude,
+          latestUser.longtitude,
+          token,
+        );
+
+        if (cancelled) return;
+
+        /*
+         * ========================================================
+         * VERY IMPORTANT
+         *
+         * GET USER AGAIN
+         *
+         * The previous user object still had:
+         *
+         * soilData: null
+         *
+         * We MUST NOT dispatch that old object.
+         * ========================================================
+         */
+
+        console.log("🔄 REFRESHING USER AFTER SOIL SAVE...");
+
+        const refreshedResponse = await axios.get("/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const refreshedUser = refreshedResponse.data;
+
+        console.log("👤 REFRESHED USER:", refreshedUser);
+
+        if (cancelled) return;
+
+        /*
+         * ========================================================
+         * VERIFY SOIL REALLY EXISTS
+         * ========================================================
+         */
+
+        if (!refreshedUser?.soilData) {
+          throw new Error(
+            "Soil was saved, but soil data is still missing from the user profile.",
+          );
+        }
+
+        /*
+         * ========================================================
+         * PUT FRESH USER INTO REDUX
+         * ========================================================
+         */
+
+        dispatch(getUser(refreshedUser));
+
+        setSoilDataCollected(true);
+
+        toast.success("Soil data collected successfully!", {
+          id: "soil-retry",
+        });
+
+        console.log("🌱 SOIL INITIALIZATION COMPLETE");
+      } catch (error: any) {
+        console.error("❌ SOIL INITIALIZATION FAILED:", error);
+
+        if (cancelled) return;
+
+        setSoilDataCollected(false);
+
+        toast.error(
+          error?.response?.data?.message ||
+            error?.message ||
+            "We could not collect your soil data. Please try again.",
+          {
+            id: "soil-retry",
+            duration: 6000,
+          },
+        );
+      }
+    };
+
+    initializeSoil();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (userData?.latitude == null && userData?.longtitude == null) return;
+  //   const fetchWeather = async () => {
+  //     try {
+  //       const data = await getWeatherInformation(
+  //         userData?.latitude,
+  //         userData?.longtitude,
+  //       );
+  //       dispatch(getWeatherData(data));
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchWeather();
+  // }, [userData?.longtitude, userData?.latitude, dispatch]);
+
+  useEffect(() => {
+    if (userData?.latitude == null || userData?.longtitude == null) {
+      return;
+    }
+
     const fetchWeather = async () => {
       try {
         const data = await getWeatherInformation(
-          userData?.latitude,
-          userData?.longtitude,
+          userData.latitude,
+          userData.longtitude,
         );
+
         dispatch(getWeatherData(data));
       } catch (error) {
-        console.error(error);
+        console.error("❌ WEATHER ERROR:", error);
       }
     };
 
     fetchWeather();
-  }, [userData?.longtitude, userData?.latitude, dispatch]);
+  }, [userData?.latitude, userData?.longtitude, dispatch]);
 
-  //
+  // useEffect(() => {
+  //   if (hasFetched.current) return;
+
+  //   if (!userData?.soilData || !weatherDataa || !soilDataCollected) return;
+  //   const soilProperties: SoilProperties = {
+  //     soilType: userData?.soilData?.soilType,
+  //     season: getSeason(),
+  //     temperature: weatherDataa?.current?.temperature_2m ?? 0,
+  //     humidity: weatherDataa?.current?.relative_humidity_2m ?? 0,
+  //     rainfall: weatherDataa?.current?.rain ?? 0,
+
+  //     fertilityLevel: userData?.soilData?.fertilityLevel ?? undefined,
+  //     soilPH: userData?.soilData?.soilPH
+  //       ? Number(userData?.soilData.soilPH)
+  //       : undefined,
+  //     organicCarbon: userData?.soilData?.organicCarbon
+  //       ? Number(userData?.soilData.organicCarbon)
+  //       : undefined,
+  //     clayPercentage: userData?.soilData?.clayPercentage
+  //       ? Number(userData?.soilData.clayPercentage)
+  //       : undefined,
+  //     sandPercentage: userData?.soilData?.sandPercentage
+  //       ? Number(userData?.soilData.sandPercentage)
+  //       : undefined,
+  //     siltPercentage: userData?.soilData?.siltPercentage
+  //       ? Number(userData?.soilData.siltPercentage)
+  //       : undefined,
+  //     cationExchangeCapacity: userData?.soilData?.cationExchangeCapacity
+  //       ? Number(userData?.soilData.cationExchangeCapacity)
+  //       : undefined,
+  //     nitrogen: userData?.soilData?.nitrogen
+  //       ? Number(userData?.soilData.nitrogen)
+  //       : undefined,
+  //     bulkDensity: userData?.soilData?.bulkDensity
+  //       ? Number(userData?.soilData.bulkDensity)
+  //       : undefined,
+  //     coarseFragments: userData?.soilData?.coarseFragments
+  //       ? Number(userData?.soilData.coarseFragments)
+  //       : undefined,
+  //   };
+  //   hasFetched.current = true;
+
+  //   const fetchRecommendationData = async () => {
+  //     try {
+  //       setRecommendationState(true);
+
+  //       const recommendationData = await postTheUserDataForRecommendation(
+  //         soilProperties,
+  //         userData.token,
+  //       );
+
+  //       setRecommendData(recommendationData.data);
+  //     } finally {
+  //       setRecommendationState(false);
+  //     }
+  //   };
+
+  //   const fetchWarningData = async () => {
+  //     console.log("###3");
+  //     try {
+  //       setFieldState(true);
+
+  //       const recommendationData = await postTheUserDataForWarning(
+  //         soilProperties,
+  //         userData.token,
+  //       );
+  //       setWarningData(recommendationData.data);
+  //     } finally {
+  //       setFieldState(false);
+  //     }
+  //   };
+
+  //   fetchWarningData();
+  //   fetchRecommendationData();
+  // }, [userData, weatherDataa, soilDataCollected]);
 
   useEffect(() => {
-    if (hasFetched.current) return;
+    if (hasFetched.current) {
+      return;
+    }
 
-    if (!userData?.soilData || !weatherDataa) return;
+    /*
+     * We need BOTH:
+     *
+     * 1. Soil
+     * 2. Weather
+     */
+
+    if (!soilDataCollected) {
+      console.log("⏳ AI WAITING FOR SOIL");
+      return;
+    }
+
+    if (!userData?.soilData) {
+      console.log("⏳ AI WAITING FOR USER SOIL DATA");
+      return;
+    }
+
+    if (!weatherDataa) {
+      console.log("⏳ AI WAITING FOR WEATHER");
+      return;
+    }
+
+    /*
+     * ============================================================
+     * PREPARE AI DATA
+     * ============================================================
+     */
+
+    const soil = userData.soilData;
+
     const soilProperties: SoilProperties = {
-      soilType: userData?.soilData?.soilType,
+      soilType: soil.soilType,
+
       season: getSeason(),
+
       temperature: weatherDataa?.current?.temperature_2m ?? 0,
+
       humidity: weatherDataa?.current?.relative_humidity_2m ?? 0,
+
       rainfall: weatherDataa?.current?.rain ?? 0,
 
-      fertilityLevel: userData?.soilData?.fertilityLevel ?? undefined,
-      soilPH: userData?.soilData?.soilPH
-        ? Number(userData?.soilData.soilPH)
-        : undefined,
-      organicCarbon: userData?.soilData?.organicCarbon
-        ? Number(userData?.soilData.organicCarbon)
-        : undefined,
-      clayPercentage: userData?.soilData?.clayPercentage
-        ? Number(userData?.soilData.clayPercentage)
-        : undefined,
-      sandPercentage: userData?.soilData?.sandPercentage
-        ? Number(userData?.soilData.sandPercentage)
-        : undefined,
-      siltPercentage: userData?.soilData?.siltPercentage
-        ? Number(userData?.soilData.siltPercentage)
-        : undefined,
-      cationExchangeCapacity: userData?.soilData?.cationExchangeCapacity
-        ? Number(userData?.soilData.cationExchangeCapacity)
-        : undefined,
-      nitrogen: userData?.soilData?.nitrogen
-        ? Number(userData?.soilData.nitrogen)
-        : undefined,
-      bulkDensity: userData?.soilData?.bulkDensity
-        ? Number(userData?.soilData.bulkDensity)
-        : undefined,
-      coarseFragments: userData?.soilData?.coarseFragments
-        ? Number(userData?.soilData.coarseFragments)
-        : undefined,
+      fertilityLevel: soil.fertilityLevel ?? undefined,
+
+      soilPH: soil.soilPH != null ? Number(soil.soilPH) : undefined,
+
+      organicCarbon:
+        soil.organicCarbon != null ? Number(soil.organicCarbon) : undefined,
+
+      clayPercentage:
+        soil.clayPercentage != null ? Number(soil.clayPercentage) : undefined,
+
+      sandPercentage:
+        soil.sandPercentage != null ? Number(soil.sandPercentage) : undefined,
+
+      siltPercentage:
+        soil.siltPercentage != null ? Number(soil.siltPercentage) : undefined,
+
+      cationExchangeCapacity:
+        soil.cationExchangeCapacity != null
+          ? Number(soil.cationExchangeCapacity)
+          : undefined,
+
+      nitrogen: soil.nitrogen != null ? Number(soil.nitrogen) : undefined,
+
+      bulkDensity:
+        soil.bulkDensity != null ? Number(soil.bulkDensity) : undefined,
+
+      coarseFragments:
+        soil.coarseFragments != null ? Number(soil.coarseFragments) : undefined,
     };
+
+    console.log("🤖 FINAL AI INPUT:", soilProperties);
+
+    /*
+     * Prevent duplicate AI calls.
+     */
     hasFetched.current = true;
+
+    /*
+     * ============================================================
+     * RECOMMENDATION
+     * ============================================================
+     */
 
     const fetchRecommendationData = async () => {
       try {
         setRecommendationState(true);
 
-        const recommendationData = await postTheUserDataForRecommendation(
+        const response = await postTheUserDataForRecommendation(
           soilProperties,
           userData.token,
         );
 
-        setRecommendData(recommendationData.data);
+        console.log("🤖 RECOMMENDATION RESPONSE:", response);
+
+        setRecommendData(response.data);
+      } catch (error) {
+        toast.error("For today, recommendations currently are unavailable, please check tomorrow.")
+        console.error("❌ RECOMMENDATION ERROR:", error);
       } finally {
         setRecommendationState(false);
       }
     };
 
+    /*
+     * ============================================================
+     * WARNING
+     * ============================================================
+     */
+
     const fetchWarningData = async () => {
       try {
         setFieldState(true);
 
-        const recommendationData = await postTheUserDataForWarning(
+        const response = await postTheUserDataForWarning(
           soilProperties,
           userData.token,
         );
-        setWarningData(recommendationData.data);
+
+        console.log("⚠️ WARNING RESPONSE:", response);
+
+        setWarningData(response.data);
+      } catch (error) {
+        toast.error("For today, warnings currently are unavailable, please check tomorrow.")
+        console.error("❌ WARNING ERROR:", error);
       } finally {
         setFieldState(false);
       }
     };
 
-    fetchWarningData();
     fetchRecommendationData();
-  }, [userData, weatherDataa]);
+    fetchWarningData();
+  }, [soilDataCollected, userData?.soilData, userData?.token, weatherDataa]);
 
   const weatherData: weatherMenu = [
     {
@@ -227,56 +556,66 @@ export default function Dashboard() {
                 />
               </div>
             ) : (
-              <div className="w-full border border-white p-2 rounded-lg">
+              <div className="w-full h-full border border-white p-2 rounded-lg">
                 <div className="w-full text-white text-md sm:text-lg md:text-xl lg:text-3xl font-semibold ">
                   <h1 className="p-2 md:p-5">Best Crops for Today</h1>
                 </div>
 
-                <div className="w-full  p-4 flex flex-col ">
-                  {reccomenData?.slice(0, 1).map((ele) => (
-                    <div key={ele.cropName}>
-                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                          Best Crop:
+                <div className="w-full p-4 flex flex-col ">
+                  {reccomenData?.length == 0 ? (
+                    <>
+                      <div className="flex items-center justify-center text-white text-xl">
+                        No crops for today
+                      </div>
+                    </>
+                  ) : (
+                    reccomenData?.slice(0, 1).map((ele) => (
+                      <div key={ele.cropName}>
+                        <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                          <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                            Best Crop:
+                          </div>
+
+                          <div className="w-2/3 text-white sm:text-md md:text-xl lg:text-2xl">
+                            {ele.cropName}
+                          </div>
                         </div>
 
-                        <div className="w-2/3 text-white sm:text-md md:text-xl lg:text-2xl">
-                          {ele.cropName}
+                        <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                          <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                            Confidence:
+                          </div>
+
+                          <div className="w-2/3 text-white">
+                            {ele.confidence}
+                          </div>
+                        </div>
+
+                        <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
+                          <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                            Best Score:
+                          </div>
+
+                          <div className="w-2/3 text-white">
+                            {" "}
+                            {((ele.score / 500) * 100).toFixed(1)}%
+                          </div>
+                        </div>
+
+                        <div className="w-full p-2">
+                          <div className="text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
+                            Why?
+                          </div>
+
+                          <ul className="list-disc list-inside space-y-2 text-white mt-2">
+                            {ele.why.map((reason, index) => (
+                              <li key={index}>{reason}</li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
-
-                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                          Confidence:
-                        </div>
-
-                        <div className="w-2/3 text-white">{ele.confidence}</div>
-                      </div>
-
-                      <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
-                        <div className="w-auto mr-0 sm:mr-4 whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                          Best Score:
-                        </div>
-
-                        <div className="w-2/3 text-white">
-                          {" "}
-                          {((ele.score / 500) * 100).toFixed(1)}%
-                        </div>
-                      </div>
-
-                      <div className="w-full p-2">
-                        <div className="text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
-                          Why?
-                        </div>
-
-                        <ul className="list-disc list-inside space-y-2 text-white mt-2">
-                          {ele.why.map((reason, index) => (
-                            <li key={index}>{reason}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  )}
                   {/* <div className="w-full p-2 flex flex-col md:flex-row lg:flex-col xl:flex-row justify-start lg:justify-between md:items-center lg:items-start">
                     <div className="w-auto mr-0 sm:mr-4 whitespace-normal sm:whitespace-nowrap text-white text-md sm:text-lg md:text-xl lg:text-2xl font-semibold underline underline-offset-4">
                       Confidence:
@@ -311,14 +650,33 @@ export default function Dashboard() {
                 </div>
 
                 <div className="w-full mt-4 flex justify-center items-center">
-                  <button
-                    className="text-recommendation text-lg md:text-xl bg-amber-50 p-3 md:p-4 w-full md:w-96 rounded-md font-medium hover:bg-amber-100 transition-colors"
-                    onClick={() => {
-                      handleModalOpen();
-                    }}
-                  >
-                    Other Suitable Crops
-                  </button>
+                  {(reccomenData?.length ?? 0) > 0 && (
+                    <button
+                      type="button"
+                      className="
+      block
+      text-recommendation
+      text-lg
+      md:text-xl
+      bg-amber-50
+      p-3
+      md:p-4
+      w-full
+      md:w-96
+      rounded-md
+      font-medium
+      border
+      border-amber-300
+      hover:bg-amber-100
+      transition-colors
+      opacity-100
+      visible
+    "
+                      onClick={handleModalOpen}
+                    >
+                      Other Suitable Crops
+                    </button>
+                  )}
                 </div>
               </div>
             )}

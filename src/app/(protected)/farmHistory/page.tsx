@@ -203,10 +203,10 @@ const FarmHistory = () => {
         <div className="lg:hidden rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-4  p-5 shadow-md transition hover:shadow-xl ">
           <div className="col-span-1 sm:col-span-2 bg-advisory border rounded-md p-3">
             <div className="flex flex-col sm:flex-row justify-between">
-              {farmHistory?.map((data) => {
+              {farmHistory?.map((data,index) => {
                 return (
-                  <>
-                    <div className="flex flex-1 flex-col" key={data?.crop}>
+                  <React.Fragment key={`${data?.crop}-${index}`}>
+                    <div className="flex flex-1 flex-col">
                       <div className="flex flex-col gap-2">
                         <h2 className="text-xl sm:text-2xl font-medium">
                           {data?.cropYield}/{"q"}
@@ -264,7 +264,7 @@ const FarmHistory = () => {
                         Delete
                       </button>
                     </div>
-                  </>
+                  </React.Fragment >
                 );
               })}
               {/* <div className="flex flex-1 flex-col">

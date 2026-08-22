@@ -8,6 +8,7 @@ import { getUser } from "@/src/features/Auth/authSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { useRouter } from "next/navigation";
 import {
+  collectAndSaveSoil,
   getSoilDetailsForFarmersLand,
   postTheSoilData,
 } from "@/src/services/Dashboard";
@@ -15,13 +16,15 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getCoords } from "@/src/components/CurrentLocation";
 import Image from "next/image";
-import krishimitraLogo from "@/src/assets/Logo.png"
+import krishimitraLogo from "@/src/assets/Logo.png";
+import axios from "axios";
 
 export default function RegisterPage() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [cords, setCords] = useState({ latitude: 0, longitude: 0 });
   const [error, setError] = useState({});
+  const [registering, setRegistering] = useState(false);
   const {
     register,
     handleSubmit,
@@ -35,116 +38,210 @@ export default function RegisterPage() {
     getCoords(setCords, setError);
   }, []);
 
+  // const onSubmit = async (data: RegisterForm) => {
+  //   const payload = {
+  //     ...data,
+  //     latitude: cords?.latitude,
+  //     longtitude:cords?.longitude,
+  //   };
+
+  //   try {
+  //     const registerData = await Register(payload);
+
+  //     if (!registerData?.token) {
+  //       toast.error("Registration failed");
+  //       return;
+  //     }
+  //      toast.success("Registration Complete, please wait till we collect your soil data")
+  //     localStorage.setItem("CurrentToken", registerData.token);
+  //     dispatch(getUser(registerData.user));
+
+  //     const soilResponse = await getSoilDetailsForFarmersLand(
+  //       registerData.user.latitude,
+  //       registerData.user.longtitude,
+  //     );
+
+  //     const layers = soilResponse.properties.layers;
+
+  //     const getLayerValue = (name: string): number | null => {
+  //       const layer = layers.find((l: any) => l.name === name);
+
+  //       if (!layer) return null;
+
+  //       const value = layer.depths?.[0]?.values?.["Q0.5"];
+
+  //       if (value == null) return null;
+
+  //       return value / layer.unit_measure.d_factor;
+  //     };
+
+  //     const sand = getLayerValue("sand");
+  //     const silt = getLayerValue("silt");
+  //     const clay = getLayerValue("clay");
+  //     const soc = getLayerValue("soc");
+  //     const nitrogen = getLayerValue("nitrogen");
+  //     const cec = getLayerValue("cec");
+  //     const ph = getLayerValue("phh2o");
+  //     const coarseFragments = getLayerValue("cfvo");
+
+  //     // Determine soil type
+  //     let soilType = "Loam";
+
+  //     if (clay !== null && clay >= 40) {
+  //       soilType = "Clay";
+  //     } else if (sand !== null && sand >= 70) {
+  //       soilType = "Sandy";
+  //     } else if (silt !== null && silt >= 80) {
+  //       soilType = "Silty";
+  //     }
+
+  //     // Fertility Score (0-100)
+  //     let score = 0;
+
+  //     if (soc !== null) {
+  //       score += soc >= 20 ? 3 : soc >= 10 ? 2 : 1;
+  //     }
+
+  //     if (nitrogen !== null) {
+  //       score += nitrogen >= 2 ? 3 : nitrogen >= 1 ? 2 : 1;
+  //     }
+
+  //     if (cec !== null) {
+  //       score += cec >= 25 ? 3 : cec >= 10 ? 2 : 1;
+  //     }
+
+  //     if (ph !== null) {
+  //       score += ph >= 6 && ph <= 7.5 ? 3 : ph >= 5.5 && ph <= 8 ? 2 : 1;
+  //     }
+
+  //     const fertilityLevel = Math.round((score / 12) * 100);
+
+  //     const soilPayload = {
+  //       soilType,
+  //       fertilityLevel,
+  //       soilPH: ph,
+  //       organicCarbon: soc,
+  //       clayPercentage: clay,
+  //       sandPercentage: sand,
+  //       siltPercentage: silt,
+  //       cationExchangeCapacity: cec,
+  //       nitrogen,
+  //       bulkDensity: null,
+  //       coarseFragments,
+  //       apiProvider: "ISRIC SoilGrids",
+  //     };
+
+  //     const saveResponse = await postTheSoilData(
+  //       soilPayload,
+  //       registerData.token,
+  //     );
+
+  //     if (saveResponse?.status === 200) {
+  //       toast.success(saveResponse.message);
+  //     }
+
+  //     router.push("/dashboard");
+  //   } catch (error: any) {
+  //     toast.error(
+  //       error?.response?.data?.message ||
+  //         error?.message ||
+  //         "Something went wrong.",
+  //     );
+  //   }
+  // };
+
   const onSubmit = async (data: RegisterForm) => {
+    setRegistering(true);
+
+    if (
+      !Number.isFinite(cords.latitude) ||
+      !Number.isFinite(cords.longitude) ||
+      (cords.latitude === 0 && cords.longitude === 0)
+    ) {
+      toast.error("Please allow location access and try again.");
+
+      return;
+    }
+
     const payload = {
       ...data,
-      latitude: 26.5492,
-      longtitude: 81.045,
+      latitude: 27.19,
+      longtitude: 77.87,
     };
 
     try {
+      toast.loading("Creating your registration...", {
+        id: "registration",
+      });
+
       const registerData = await Register(payload);
 
-      if (!registerData?.token) {
-        toast.error("Registration failed");
+      if (!registerData?.token || !registerData?.user) {
+        toast.error("Registration failed", {
+          id: "registration",
+        });
+
         return;
       }
 
+      console.log("✅ USER REGISTERED:", registerData.user);
+
       localStorage.setItem("CurrentToken", registerData.token);
+
       dispatch(getUser(registerData.user));
 
-      const soilResponse = await getSoilDetailsForFarmersLand(
-        registerData.user.latitude,
-        registerData.user.longtitude,
-      );
+      let soilSuccess = false;
 
-      const layers = soilResponse.properties.layers;
+      try {
+        toast.loading("Collecting your soil data...", {
+          id: "registration",
+        });
 
-      const getLayerValue = (name: string): number | null => {
-        const layer = layers.find((l: any) => l.name === name);
+        await collectAndSaveSoil(
+          registerData.user.latitude,
+          registerData.user.longtitude,
+          registerData.token,
+        );
 
-        if (!layer) return null;
+        soilSuccess = true;
 
-        const value = layer.depths?.[0]?.values?.["Q0.5"];
+        console.log("✅ SOIL COLLECTION COMPLETED");
 
-        if (value == null) return null;
+        toast.success(
+          "Registration and soil collection completed successfully!",
+          {
+            id: "registration",
+            duration: 4000,
+          },
+        );
+      } catch (soilError) {
+        console.error("❌ SOIL COLLECTION FAILED:", soilError);
 
-        return value / layer.unit_measure.d_factor;
-      };
-
-      const sand = getLayerValue("sand");
-      const silt = getLayerValue("silt");
-      const clay = getLayerValue("clay");
-      const soc = getLayerValue("soc");
-      const nitrogen = getLayerValue("nitrogen");
-      const cec = getLayerValue("cec");
-      const ph = getLayerValue("phh2o");
-      const coarseFragments = getLayerValue("cfvo");
-
-      // Determine soil type
-      let soilType = "Loam";
-
-      if (clay !== null && clay >= 40) {
-        soilType = "Clay";
-      } else if (sand !== null && sand >= 70) {
-        soilType = "Sandy";
-      } else if (silt !== null && silt >= 80) {
-        soilType = "Silty";
-      }
-
-      // Fertility Score (0-100)
-      let score = 0;
-
-      if (soc !== null) {
-        score += soc >= 20 ? 3 : soc >= 10 ? 2 : 1;
-      }
-
-      if (nitrogen !== null) {
-        score += nitrogen >= 2 ? 3 : nitrogen >= 1 ? 2 : 1;
-      }
-
-      if (cec !== null) {
-        score += cec >= 25 ? 3 : cec >= 10 ? 2 : 1;
-      }
-
-      if (ph !== null) {
-        score += ph >= 6 && ph <= 7.5 ? 3 : ph >= 5.5 && ph <= 8 ? 2 : 1;
-      }
-
-      const fertilityLevel = Math.round((score / 12) * 100);
-
-      const soilPayload = {
-        soilType,
-        fertilityLevel,
-        soilPH: ph,
-        organicCarbon: soc,
-        clayPercentage: clay,
-        sandPercentage: sand,
-        siltPercentage: silt,
-        cationExchangeCapacity: cec,
-        nitrogen,
-        bulkDensity: null,
-        coarseFragments,
-        apiProvider: "ISRIC SoilGrids",
-      };
-
-      const saveResponse = await postTheSoilData(
-        soilPayload,
-        registerData.token,
-      );
-
-      if (saveResponse?.status === 200) {
-        toast.success(saveResponse.message);
+        toast.error(
+          "Your account was created successfully, but soil data could not be collected. You can retry it from your dashboard.",
+          {
+            id: "registration",
+            duration: 7000,
+          },
+        );
       }
 
       router.push("/dashboard");
     } catch (error: any) {
+      console.error("❌ REGISTRATION FAILED:", error);
+      setRegistering(false);
       toast.error(
         error?.response?.data?.message ||
+          error?.response?.data?.error ||
           error?.message ||
-          "Something went wrong.",
+          "Something went wrong during registration.",
+        {
+          id: "registration",
+          duration: 6000,
+        },
       );
     }
+    setRegistering(false);
   };
 
   return (
@@ -367,9 +464,9 @@ export default function RegisterPage() {
           <div className="w-full flex items-center justify-end md:col-span-2">
             <button
               type="submit"
-              className="w-full rounded-xl bg-recommendation py-3 font-semibold text-white transition hover:brightness-110"
+              className={`w-full rounded-xl bg-recommendation py-3 font-semibold text-white transition hover:brightness-110 ${registering ? "disabled:bg-recommendation/35" : ""}`}
             >
-              Register
+              {registering ? "Registering..." : "Register"}
             </button>
           </div>
         </form>

@@ -9,10 +9,13 @@ import { login } from "@/src/services/auth";
 import { useRouter } from "next/navigation";
 import krishimitraLogo from "@/src/assets/Logo.png"
 import Image from "next/image";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const[logginging,setLogginging]=useState(false)
   const {
     register,
     handleSubmit,
@@ -20,15 +23,17 @@ export default function LoginPage() {
   } = useForm<LoginForm>();
 
   const onSubmit = async (data: LoginForm) => {
+    setLogginging(true)
     let loginData = await login(data);
     if (loginData?.token) {
+      toast.success("Login Successful");
       localStorage?.setItem("CurrentToken", loginData.token);
       dispatch(getUser(loginData.user));
       router.push("/dashboard");
     } else {
-      alert("Login Failed");
+      toast.error("Login Failed");
     }
-
+   setLogginging(false)
     // dispatch(getUser(data))
   };
   
@@ -95,7 +100,7 @@ export default function LoginPage() {
             type="submit"
             className="w-full rounded-xl bg-recommendation py-3 font-semibold text-white transition hover:brightness-110"
           >
-            Login
+            {logginging ? "LogginIn..." :"Login"}
           </button>
         </form>
 

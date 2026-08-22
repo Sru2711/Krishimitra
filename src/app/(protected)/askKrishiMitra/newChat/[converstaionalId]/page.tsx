@@ -70,7 +70,7 @@ const AskKrishiMitra = () => {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setSending(true)
+    setSending(true);
     if (!input.trim() && !selectedFiles) {
       return;
     }
@@ -96,7 +96,7 @@ const AskKrishiMitra = () => {
     } catch (error) {
       console.error("Failed to send:", error);
     }
-    setSending(false)
+    setSending(false);
   };
 
   const { messages, sendMessage, status } = useChat();
@@ -105,6 +105,31 @@ const AskKrishiMitra = () => {
     messages.length > 0
       ? [...conversationMessages, ...messages]
       : conversationMessages;
+
+  const uniqueMessages = displayMessages.filter((message, index, arr) => {
+    if (message.role !== "assistant") return true;
+
+    const getText = (msg: any) =>
+      msg.parts
+        ?.filter((part: any) => part.type === "text")
+        ?.map((part: any) => part.text?.trim())
+        ?.join("")
+        ?.trim();
+
+    const currentText = getText(message);
+
+    if (!currentText) return true;
+
+    // Remove this assistant message if another assistant message
+    // anywhere in the array contains the same text.
+    const duplicateIndex = arr.findIndex(
+      (m, i) =>
+        i !== index && m.role === "assistant" && getText(m) === currentText,
+    );
+
+    // Keep the LAST occurrence
+    return duplicateIndex === -1 || index > duplicateIndex;
+  });
 
   return (
     <div className="flex flex-col h-full w-full min-w-[100px] mx-auto bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
@@ -133,39 +158,60 @@ const AskKrishiMitra = () => {
         ))}
       </div> */}
       <div className="flex-1 overflow-y-auto p-4 space-y-5">
-        {displayMessages.length === 0 && (
+        {uniqueMessages.length === 0 && (
           <div className="flex h-full items-center justify-center">
             <p className="text-lg text-gray-500">Start a conversation! 🌱</p>
           </div>
         )}
+        {uniqueMessages
+          .filter((message, index, arr) => {
+            if (message.role !== "assistant") return true;
 
-        {displayMessages.map((message, index) => {
-          const isUser = message.role === "user";
+            const text = message.parts
+              ?.filter((part: any) => part.type === "text")
+              ?.map((part: any) => part.text)
+              ?.join("");
 
-          return (
-            <div
-              key={message.id + index}
-              className={`flex ${isUser ? "justify-end" : "justify-start"}`}
-            >
+            const previousAssistant = arr.slice(0, index).find((m) => {
+              if (m.role !== "assistant") return false;
+
+              const previousText = m.parts
+                ?.filter((part: any) => part.type === "text")
+                ?.map((part: any) => part.text)
+                ?.join("");
+
+              return previousText === text && text;
+            });
+
+            return !previousAssistant;
+          })
+          .map((message, index) => {
+            const isUser = message.role === "user";
+
+            return (
               <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-sm max-h-75
+                key={message.id + index}
+                className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-sm max-h-75
             overflow-y-auto
             farmer-scrollbar  ${
               isUser
                 ? "bg-recommendation text-white rounded-br-md"
                 : "bg-gray-100 text-gray-800 rounded-bl-md"
             }`}
-              >
-                <div className="mb-1 text-xs font-semibold opacity-70">
-                  {isUser ? "You" : "KrishiMitra"}
-                </div>
-
-                <div
-                  className={`prose prose-sm max-w-none ${
-                    isUser ? "prose-invert" : ""
-                  }`}
                 >
-                  {/* {message.parts.map((part: any, index: number) => {
+                  <div className="mb-1 text-xs font-semibold opacity-70">
+                    {isUser ? "You" : "KrishiMitra"}
+                  </div>
+
+                  <div
+                    className={`prose prose-sm max-w-none ${
+                      isUser ? "prose-invert" : ""
+                    }`}
+                  >
+                    {/* {message.parts.map((part: any, index: number) => {
                     if (part.type === "text") {
                       return (
                         <ReactMarkdown key={part?.id + index}>
@@ -176,45 +222,45 @@ const AskKrishiMitra = () => {
 
                     return null;
                   })} */}
-                  <div className="space-y-3">
-                    {message.parts.map((part: any, index: number) => {
-                      // IMAGE
-                      if (
-                        part.type === "file" &&
-                        part.mediaType?.startsWith("image/")
-                      ) {
-                        return (
-                          <img
-                            key={index}
-                            src={part.url}
-                            alt={part.filename ?? "Uploaded image"}
-                            className="max-w-[300px] rounded-xl"
-                          />
-                        );
-                      }
+                    <div className="space-y-3">
+                      {message.parts.map((part: any, index: number) => {
+                        // IMAGE
+                        if (
+                          part.type === "file" &&
+                          part.mediaType?.startsWith("image/")
+                        ) {
+                          return (
+                            <img
+                              key={index}
+                              src={part.url}
+                              alt={part.filename ?? "Uploaded image"}
+                              className="max-w-[300px] rounded-xl"
+                            />
+                          );
+                        }
 
-                      // TEXT
-                      if (part.type === "text") {
-                        return (
-                          <div
-                            key={index}
-                            className={`prose prose-sm max-w-none ${
-                              isUser ? "prose-invert" : ""
-                            }`}
-                          >
-                            <ReactMarkdown>{part.text}</ReactMarkdown>
-                          </div>
-                        );
-                      }
+                        // TEXT
+                        if (part.type === "text") {
+                          return (
+                            <div
+                              key={index}
+                              className={`prose prose-sm max-w-none ${
+                                isUser ? "prose-invert" : ""
+                              }`}
+                            >
+                              <ReactMarkdown>{part.text}</ReactMarkdown>
+                            </div>
+                          );
+                        }
 
-                      return null;
-                    })}
+                        return null;
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
       {/* Suggested Questions Block - Hidden on very small screens, wraps on larger */}
       {/* <div className="hidden sm:block p-4 border-t border-gray-100">
