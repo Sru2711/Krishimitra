@@ -5,14 +5,12 @@ export interface recommendDataType{
     why:string[];
 }
 
-export interface SoilProperties {
+export interface SoilData {
   soilType?: string;
   season: "Kharif" | "Rabi" | "Zaid";
-
   temperature: number;
   humidity: number;
   rainfall: number;
-
   fertilityLevel?: number;
   soilPH?: number;
   organicCarbon?: number;

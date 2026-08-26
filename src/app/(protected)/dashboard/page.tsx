@@ -30,10 +30,10 @@ import { getUser } from "@/src/features/Auth/authSlice";
 import Plant from "@/src/assets/Plant.gif";
 import Flower from "@/src/assets/Flower.gif";
 import { getSoilDataApi } from "@/src/api";
-import { recommendDataType, SoilProperties } from "@/src/types/dasboard";
+import { recommendDataType, SoilData } from "@/src/types/dasboard";
 import toast from "react-hot-toast";
 import axios from "axios";
-import message from '@/src/assets/Message.png';
+import message from "@/src/assets/Message.png";
 
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
@@ -249,8 +249,8 @@ export default function Dashboard() {
     const fetchWeather = async () => {
       try {
         const data = await getWeatherInformation(
-          userData.latitude,
-          userData.longtitude,
+          userData.latitude ?? 0,
+          userData.longtitude ?? 0,
         );
 
         dispatch(getWeatherData(data));
@@ -373,7 +373,7 @@ export default function Dashboard() {
 
     const soil = userData.soilData;
 
-    const soilProperties: SoilProperties = {
+    const soilProperties: SoilData = {
       soilType: soil.soilType,
 
       season: getSeason(),
@@ -433,14 +433,16 @@ export default function Dashboard() {
 
         const response = await postTheUserDataForRecommendation(
           soilProperties,
-          userData.token,
+          userData?.token,
         );
 
         console.log("🤖 RECOMMENDATION RESPONSE:", response);
 
         setRecommendData(response.data);
       } catch (error) {
-        toast.error("For today, recommendations currently are unavailable, please check tomorrow.")
+        toast.error(
+          "For today, recommendations currently are unavailable, please check tomorrow.",
+        );
         console.error("❌ RECOMMENDATION ERROR:", error);
       } finally {
         setRecommendationState(false);
@@ -466,7 +468,9 @@ export default function Dashboard() {
 
         setWarningData(response.data);
       } catch (error) {
-        toast.error("For today, warnings currently are unavailable, please check tomorrow.")
+        toast.error(
+          "For today, warnings currently are unavailable, please check tomorrow.",
+        );
         console.error("❌ WARNING ERROR:", error);
       } finally {
         setFieldState(false);
@@ -539,8 +543,8 @@ export default function Dashboard() {
               </div>
               <div className="w-full  p-2">
                 <MapComponent
-                  latitude={userData?.latitude}
-                  longitude={userData?.longtitude}
+                  latitude={userData?.latitude ?? 0}
+                  longitude={userData?.longtitude ?? 0}
                 />
               </div>
             </div>

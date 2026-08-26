@@ -1,3 +1,4 @@
+import { SoilData } from "@/src/types/dasboard";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 console.log("Auth slice loaded");
@@ -7,12 +8,19 @@ interface User {
   name: string;
   email: string;
   mobile: string;
-  state: string;  
+  state: string;
   district: string;
   pincode: string;
   farmerType: string;
   landHolding: number;
   primaryCrop: string;
+  token:string;
+  latitude?: number | null;
+  longtitude?: number | null;
+  aadharHash:string;
+  soilData?: SoilData | null;
+  createdAt:Date;
+  updatedAt:Date
 }
 
 interface AuthState {
