@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const cropId = params.id;
+  const { id: cropId } = await params;
   const userId = request.headers.get("x-user-id");
   if (!cropId) {
     return NextResponse.json(
