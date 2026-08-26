@@ -2,6 +2,7 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
+import { recommendDataType } from "../types/dasboard";
 
 type Props = {
   modalOpen: boolean;
