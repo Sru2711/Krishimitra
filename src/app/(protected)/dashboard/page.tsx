@@ -43,6 +43,11 @@ export default function Dashboard() {
   const [reccomenData, setRecommendData] = useState<recommendDataType[]>([]);
   const [warningData, setWarningData] = useState<any[]>([]);
   const hasFetched = useRef(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -523,7 +528,7 @@ export default function Dashboard() {
       <div>
         <div className="flex flex-col">
           <span className="font-bold text-2xl md:text-3xl text-recommendation">
-            Good Morning! {userData?.name}
+            Good Morning! {mounted ? userData?.name : ""}
           </span>
           <span className="font-medium text-sm md:text-md text-gray-600">
             Location: {userData?.state}, District :{userData?.district}| Date:
